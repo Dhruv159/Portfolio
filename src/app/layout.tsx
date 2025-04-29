@@ -22,7 +22,7 @@ export default function RootLayout({
         <meta name="color-scheme" content="light dark" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}<Toaster/>
         </ThemeProvider>
       </body>

@@ -63,7 +63,7 @@ export default function Home() {
                     Available for freelance work
                   </div>
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Hi, I&#39;m
+                    Hi, I&#39;m {''}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-primary/70">
                       Dhruv Sharma
                     </span>
