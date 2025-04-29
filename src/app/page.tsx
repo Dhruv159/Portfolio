@@ -63,13 +63,13 @@ export default function Home() {
                     Available for freelance work
                   </div>
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Hi, I'm{" "}
+                    Hi, I&#39;m
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-primary/70">
                       Dhruv Sharma
                     </span>
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  I'm a developer focused on building efficient, user-friendly, and visually polished web applications.
+                  I&#39;m a developer focused on building efficient, user-friendly, and visually polished web applications.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -124,7 +124,7 @@ export default function Home() {
               <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">About Me</span>
               <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">The Person Behind the Code</h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                I'm a passionate developer with a focus on creating intuitive and performant web applications. With
+                I&#39;m a passionate developer with a focus on creating intuitive and performant web applications. With
                 experience in both frontend and backend technologies, I enjoy bringing ideas to life through code.
               </p>
               <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -268,7 +268,7 @@ export default function Home() {
               <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
                 Get in Touch
               </span>
-              <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Let's Work Together</h2>
+              <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Let&#39;ms Work Together</h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                 Feel free to reach out for collaborations or just a friendly hello
               </p>
@@ -335,9 +335,11 @@ function ProjectCard({ title, description, image, link, tags }) {
   return (
     <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md dark:bg-background/80">
       <div className="aspect-video overflow-hidden">
-        <img
+      <Image
           src={image || "/placeholder.svg"}
           alt={title}
+          width={400}
+          height={300}
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
       </div>
