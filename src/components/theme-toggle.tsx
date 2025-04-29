@@ -9,7 +9,7 @@ export function ThemeToggle() {
 
   // Toggle between light and dark directly instead of using dropdown
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
+    setTheme(theme === "light" ? "dark" : "light")
   }
 
   return (
