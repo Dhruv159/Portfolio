@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import ContactForm from "@/components/contact-form"
 
+type ContactCardProps = {
+  icon: React.ReactNode
+  title: string
+  value: string
+  href?: string
+}
+
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background">
@@ -62,14 +69,13 @@ export default function Home() {
                     </span>
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    I'm a developer passionate about creating efficient, user-friendly, and visually appealing web
-                    applications.
+                  I'm a developer focused on building efficient, user-friendly, and visually polished web applications.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button
                     size="lg"
-                    className="group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90"
+                    className="group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90 dark:text-black"
                   >
                     <Link href="#contact" className="flex items-center">
                       Contact Me
@@ -142,8 +148,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold">Education</h3>
-                  <p className="text-muted-foreground">Bachelor's in Computer Science</p>
-                  <p className="text-sm text-muted-foreground">University Name, 2018-2022</p>
+                  <p className="text-muted-foreground">B.Tech in Computer Science and Engineering</p>
+                  <p className="text-sm text-muted-foreground">SRM IST, 2019-2023</p>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md dark:bg-background/80">
                   <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
@@ -165,8 +171,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold">Experience</h3>
-                  <p className="text-muted-foreground">Frontend Developer</p>
-                  <p className="text-sm text-muted-foreground">Company Name, 2022-Present</p>
+                  <p className="text-muted-foreground">Software Engineer</p>
+                  <p className="text-sm text-muted-foreground">Keka HR, 2023-Present</p>
                 </div>
                 <div className="group relative overflow-hidden rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md dark:bg-background/80">
                   <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
@@ -188,7 +194,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold">Location</h3>
-                  <p className="text-muted-foreground">San Francisco, CA</p>
+                  <p className="text-muted-foreground">Punjab, India</p>
                   <p className="text-sm text-muted-foreground">Available for remote work</p>
                 </div>
               </div>
@@ -226,27 +232,6 @@ export default function Home() {
                 link="#"
                 tags={["React Native", "Firebase", "Redux"]}
               />
-              <ProjectCard
-                title="Project Four"
-                description="A dashboard for data visualization"
-                image="/placeholder.svg?height=300&width=400"
-                link="#"
-                tags={["D3.js", "Node.js", "Express"]}
-              />
-              <ProjectCard
-                title="Project Five"
-                description="A blog platform with CMS integration"
-                image="/placeholder.svg?height=300&width=400"
-                link="#"
-                tags={["Next.js", "Sanity.io", "Vercel"]}
-              />
-              <ProjectCard
-                title="Project Six"
-                description="A real-time chat application"
-                image="/placeholder.svg?height=300&width=400"
-                link="#"
-                tags={["Socket.io", "React", "Node.js"]}
-              />
             </div>
           </div>
         </section>
@@ -276,7 +261,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="contact" className="w-full py-12 md:py-24 lg:py-32 relative">
+        <section className="w-full py-12 md:py-24 lg:py-32 relative" id="contact">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background dark:from-primary/5 dark:via-background dark:to-background"></div>
           <div className="container px-4 md:px-6">
             <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
@@ -288,21 +273,29 @@ export default function Home() {
                 Feel free to reach out for collaborations or just a friendly hello
               </p>
               <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-                <ContactCard icon={<Mail className="h-6 w-6" />} title="Email" value="dhruvsarkhandia9@gmail.com" />
-                <ContactCard
-                  icon={<Github className="h-6 w-6" />}
-                  title="GitHub"
-                  value="https://github.com/Dhruv159"
-                  href="https://github.com/Dhruv159"
-                />
-                <ContactCard
-                  icon={<Linkedin className="h-6 w-6" />}
-                  title="LinkedIn"
-                  value="www.linkedin.com/in/dhruv-sharma-635a1a209"
-                />
+              <ContactCard
+                icon={<Mail className="h-6 w-6" />}
+                title="Email"
+                value="dhruvsarkhandia9@gmail.com"
+                href="mailto:dhruvsarkhandia9@gmail.com"
+              />
+
+              <ContactCard
+                icon={<Github className="h-6 w-6" />}
+                title="GitHub"
+                value="github.com/Dhruv-Sharma"
+                href="https://github.com/Dhruv159"
+              />
+
+              <ContactCard
+                icon={<Linkedin className="h-6 w-6" />}
+                title="LinkedIn"
+                value="linkedin.com/in/Dhruv-Sharma"
+                href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
+              />
               </div>
               <div className="mt-12 w-full max-w-md">
-                <div className="rounded-lg border bg-background p-6 shadow-sm dark:bg-background/80">
+                <div className="rounded-lg border bg-background p-6 shadow-sm dark:bg-background/80 dark:text-white">
                   <h3 className="mb-4 text-xl font-bold">Send Me a Message</h3>
                   <ContactForm />
                 </div>
@@ -314,7 +307,7 @@ export default function Home() {
       <footer className="w-full border-t py-8 bg-muted/30 dark:bg-muted/10">
         <div className="container flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2024 Dhruv Sharma. All rights reserved.
+            © 2025 Dhruv Sharma. All rights reserved.
           </p>
           <div className="flex gap-4">
             <Link
@@ -325,7 +318,7 @@ export default function Home() {
               <span className="sr-only">GitHub</span>
             </Link>
             <Link
-              href="www.linkedin.com/in/dhruv-sharma-635a1a209"
+              href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
               className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <Linkedin className="h-4 w-4" />
@@ -390,7 +383,7 @@ function SkillCard({ name, level, icon }) {
   )
 }
 
-function ContactCard({ icon, title, value, href }) {
+function ContactCard({ icon, title, value, href }: ContactCardProps) {
   return (
     <div className="group flex flex-col items-center gap-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/50 dark:bg-background/80">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary/20">
@@ -398,7 +391,12 @@ function ContactCard({ icon, title, value, href }) {
       </div>
       <h3 className="text-lg font-semibold">{title}</h3>
       {href ? (
-        <a href={href} className="text-sm text-muted-foreground hover:text-primary">
+        <a
+          href={href}
+          className="text-sm text-muted-foreground hover:text-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {value}
         </a>
       ) : (

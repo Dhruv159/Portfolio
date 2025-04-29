@@ -17,12 +17,12 @@ export default function ContactForm() {
     message: "",
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -44,7 +44,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="grid gap-4">
       <div className="grid gap-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name" className="text-left">Name</Label>
         <Input
           id="name"
           name="name"
@@ -52,11 +52,12 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          className="transition-all focus-visible:ring-primary"
+          className="transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
         />
       </div>
+
       <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email" className="text-left">Email</Label>
         <Input
           id="email"
           name="email"
@@ -65,11 +66,12 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           required
-          className="transition-all focus-visible:ring-primary"
+          className="transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
         />
       </div>
+
       <div className="grid gap-2">
-        <Label htmlFor="message">Message</Label>
+        <Label htmlFor="message" className="text-left">Message</Label>
         <Textarea
           id="message"
           name="message"
@@ -77,13 +79,15 @@ export default function ContactForm() {
           value={formData.message}
           onChange={handleChange}
           required
-          className="min-h-[120px] transition-all focus-visible:ring-primary"
+          className="min-h-[120px] transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
         />
       </div>
+
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full mt-2 group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90"
+        className="w-full mt-2 group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90 dark:text-black"
+        style={{ cursor: 'pointer' }}
       >
         {isSubmitting ? (
           "Sending..."
