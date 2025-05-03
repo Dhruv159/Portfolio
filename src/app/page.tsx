@@ -204,10 +204,10 @@ export default function Home() {
         <section id="projects" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-              <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Portfolio</span>
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Projects</span>
               <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Featured Projects</h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                Check out some of my recent work
+                Check out some of my recent work.
               </p>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
@@ -242,7 +242,7 @@ export default function Home() {
               <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Expertise</span>
               <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Skills & Technologies</h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                Technologies and tools I work with
+                Technologies and tools I work with.
               </p>
             </div>
             <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 py-12 md:grid-cols-3 lg:grid-cols-4">
@@ -268,9 +268,9 @@ export default function Home() {
               <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
                 Get in Touch
               </span>
-              <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Let&#39;ms Work Together</h2>
+              <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Let&#39;s Work Together</h2>
               <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                Feel free to reach out for collaborations or just a friendly hello
+                Feel free to reach out for collaborations or just a friendly hello.
               </p>
               <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
               <ContactCard
