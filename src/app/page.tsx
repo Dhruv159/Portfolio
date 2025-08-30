@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from 'next/image'
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Mail, Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -17,6 +17,7 @@ type ContactCardProps = {
 
 export default function Home() {
     const [activeSection, setActiveSection] = useState("")
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -42,6 +43,10 @@ export default function Home() {
     }, [])
 
     const isActive = (section: string) => activeSection === section
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen)
+    }
 
     return (
         <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background">
@@ -100,11 +105,60 @@ export default function Home() {
                             </Link>
                         </nav>
                         <ThemeToggle />
-                        <Button variant="outline" size="sm" className="md:hidden">
-                            Menu
+                        <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="md:hidden"
+                            onClick={toggleMobileMenu}
+                        >
+                            {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
                         </Button>
                     </div>
                 </div>
+                
+                {/* Mobile Navigation Menu */}
+                {isMobileMenuOpen && (
+                    <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                        <nav className="container py-4 flex flex-col gap-4">
+                            <Link 
+                                href="#about" 
+                                className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("about") ? "text-primary" : "text-muted-foreground"
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                About
+                            </Link>
+                            <Link
+                                href="#projects"
+                                className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("projects") ? "text-primary" : "text-muted-foreground"
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Projects
+                            </Link>
+                            <Link 
+                                href="#skills" 
+                                className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("skills") ? "text-primary" : "text-muted-foreground"
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Skills
+                            </Link>
+                            <Link 
+                                href="#contact" 
+                                className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("contact") ? "text-primary" : "text-muted-foreground"
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                Contact
+                            </Link>
+                        </nav>
+                    </div>
+                )}
             </header>
             <main className="flex-1">
                 <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 overflow-hidden relative">
@@ -309,39 +363,71 @@ export default function Home() {
                 <section className="w-full py-12 md:py-24 lg:py-32 relative" id="contact">
                     <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background dark:from-primary/5 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
-                        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-                            <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-                                Get in Touch
-                            </span>
-                            <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Let&#39;s Work Together</h2>
-                            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                                Feel free to reach out for collaborations or just a friendly hello.
-                            </p>
-                            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-                                <ContactCard
-                                    icon={<Mail className="h-6 w-6" />}
-                                    title="Email"
-                                    value="dhruvsarkhandia9@gmail.com"
-                                    href="mailto:dhruvsarkhandia9@gmail.com"
-                                />
-
-                                <ContactCard
-                                    icon={<Github className="h-6 w-6" />}
-                                    title="GitHub"
-                                    value="github.com/Dhruv-Sharma"
-                                    href="https://github.com/Dhruv159"
-                                />
-
-                                <ContactCard
-                                    icon={<Linkedin className="h-6 w-6" />}
-                                    title="LinkedIn"
-                                    value="linkedin.com/in/Dhruv-Sharma"
-                                    href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
-                                />
+                        <div className="mx-auto max-w-6xl">
+                            <div className="text-center mb-12">
+                                <h2 className="text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+                                    Get In Touch
+                                </h2>
                             </div>
-                            <div className="mt-12 w-full max-w-md">
-                                <div className="rounded-lg border bg-background p-6 shadow-sm dark:bg-background/80 dark:text-white">
-                                    <h3 className="mb-4 text-xl font-bold">Send Me a Message</h3>
+                            
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                {/* Left Column - Contact Information */}
+                                <div className="space-y-6">
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-primary mb-4">Contact Information</h3>
+                                        <p className="text-muted-foreground mb-4">
+                                            I'm currently available for freelance work and full-time opportunities. If you have a project that needs some creative touch, I'd love to hear about it!
+                                        </p>
+                                        <p className="text-muted-foreground mb-6">
+                                            Feel free to reach out through the contact form or via the following channels:
+                                        </p>
+                                    </div>
+                                    
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                                <Mail className="h-5 w-5" />
+                                            </div>
+                                            <a 
+                                                href="mailto:dhruvsarkhandia9@gmail.com"
+                                                className="text-muted-foreground hover:text-primary transition-colors"
+                                            >
+                                                dhruvsarkhandia9@gmail.com
+                                            </a>
+                                        </div>
+                                        
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                                <Linkedin className="h-5 w-5" />
+                                            </div>
+                                            <a 
+                                                href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-muted-foreground hover:text-primary transition-colors"
+                                            >
+                                                linkedin.com/in/dhruv-sharma
+                                            </a>
+                                        </div>
+                                        
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                                <Github className="h-5 w-5" />
+                                            </div>
+                                            <a 
+                                                href="https://github.com/Dhruv159"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-muted-foreground hover:text-primary transition-colors"
+                                            >
+                                                github.com/Dhruv159
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {/* Right Column - Contact Form */}
+                                <div className="bg-background rounded-lg border p-6 shadow-sm">
                                     <ContactForm />
                                 </div>
                             </div>

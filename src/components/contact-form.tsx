@@ -10,93 +10,109 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
 export default function ContactForm() {
-      const [isSubmitting, setIsSubmitting] = useState(false)
-      const [formData, setFormData] = useState({
-          name: "",
-          email: "",
-          message: "",
-      })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+    })
 
-      const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-          const { name, value } = e.target
-          setFormData((prev) => ({ ...prev, [name]: value }))
-      }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
+        setFormData((prev) => ({ ...prev, [name]: value }))
+    }
 
-      const handleSubmit = async (e: React.FormEvent) => {
-          e.preventDefault()
-          setIsSubmitting(true)
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault()
+        setIsSubmitting(true)
 
-          // Simulate form submission
-          await new Promise((resolve) => setTimeout(resolve, 1000))
+        // Simulate form submission
+        await new Promise((resolve) => setTimeout(resolve, 1000))
 
-          toast.success("Message sent!", {
-              description: "Thank you for reaching out. I'll get back to you soon.",
-          })
+        toast.success("Message sent!", {
+            description: "Thank you for reaching out. I'll get back to you soon.",
+        })
 
-          setFormData({
-              name: "",
-              email: "",
-              message: "",
-          })
-          setIsSubmitting(false)
-      }
+        setFormData({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+        })
+        setIsSubmitting(false)
+    }
 
-      return (
-          <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="grid gap-2">
-                  <Label htmlFor="name" className="text-left">Name</Label>
-                  <Input
-                      id="name"
-                      name="name"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
-                  />
-              </div>
+    return (
+        <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+                <Label htmlFor="name" className="text-sm font-medium">Name</Label>
+                <Input
+                    id="name"
+                    name="name"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+            </div>
 
-              <div className="grid gap-2">
-                  <Label htmlFor="email" className="text-left">Email</Label>
-                  <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Your email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
-                  />
-              </div>
+            <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Your email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+            </div>
 
-              <div className="grid gap-2">
-                  <Label htmlFor="message" className="text-left">Message</Label>
-                  <Textarea
-                      id="message"
-                      name="message"
-                      placeholder="Your message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      className="min-h-[120px] transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
-                  />
-              </div>
+            <div className="space-y-2">
+                <Label htmlFor="subject" className="text-sm font-medium">Subject</Label>
+                <Input
+                    id="subject"
+                    name="subject"
+                    placeholder="Subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+            </div>
 
-              <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full mt-2 group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90 dark:text-black"
-                  style={{ cursor: 'pointer' }}
-              >
-                  {isSubmitting ? (
-                      "Sending..."
-                  ) : (
-                      <span className="flex items-center justify-center">
-                          Send Message <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </span>
-                  )}
-              </Button>
-          </form>
-      )
+            <div className="space-y-2">
+                <Label htmlFor="message" className="text-sm font-medium">Message</Label>
+                <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Your message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent min-h-[120px] resize-none"
+                />
+            </div>
+
+            <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-3 px-6 rounded-md font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                style={{ cursor: 'pointer' }}
+            >
+                {isSubmitting ? (
+                    "Sending..."
+                ) : (
+                    <>
+                        <Send className="h-4 w-4 text-white" />
+                        Send Message
+                    </>
+                )}
+            </Button>
+        </form>
+    )
 }
