@@ -31,19 +31,41 @@ export default function ContactForm({ selectedColor = "lavender" }: ContactFormP
         e.preventDefault()
         setIsSubmitting(true)
 
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
 
-        toast.success("Message sent!", {
-            description: "Thank you for reaching out. I'll get back to you soon.",
-        })
+            const result = await response.json()
 
-        setFormData({
-            name: "",
-            email: "",
-            message: "",
-        })
-        setIsSubmitting(false)
+            if (result.success) {
+                toast.success("Message sent successfully!", {
+                    description: "Thank you for reaching out. I'll get back to you soon!",
+                })
+
+                // Reset form
+                setFormData({
+                    name: "",
+                    email: "",
+                    message: "",
+                })
+            } else {
+                toast.error("Failed to send message", {
+                    description: result.message || "Please try again later.",
+                })
+            }
+        } catch (error) {
+            console.error('Form submission error:', error)
+            toast.error("Failed to send message", {
+                description: "Please check your internet connection and try again.",
+            })
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -97,7 +119,10 @@ export default function ContactForm({ selectedColor = "lavender" }: ContactFormP
                 }}
             >
                 {isSubmitting ? (
-                    "Sending..."
+                    <span className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        Sending...
+                    </span>
                 ) : (
                     <span className="flex items-center justify-center">
                         Send Message <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

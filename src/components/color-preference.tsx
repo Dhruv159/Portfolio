@@ -72,7 +72,7 @@ export default function ColorPreference({ onColorChange, currentColor }: ColorPr
                 variant="outline"
                 size="sm"
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 cursor-pointer"
             >
                 <Palette className="h-4 w-4" />
                 <div 
@@ -91,7 +91,7 @@ export default function ColorPreference({ onColorChange, currentColor }: ColorPr
                                     onColorChange(option.value)
                                     setIsOpen(false)
                                 }}
-                                className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors ${
+                                className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors cursor-pointer ${
                                     currentColor === option.value
                                         ? "bg-muted text-foreground"
                                         : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"
