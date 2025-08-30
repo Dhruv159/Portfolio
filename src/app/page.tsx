@@ -82,7 +82,7 @@ export default function Home() {
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
                             <span 
-                                className="font-bold text-xl text-transparent bg-clip-text"
+                                className="font-bold text-xl bg-clip-text"
                                 style={{ 
                                     backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
                                 }}
@@ -252,7 +252,7 @@ export default function Home() {
                                     </div> */}
                                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                         Hi, I&#39;m {''}
-                                        <span className="text-transparent bg-clip-text"
+                                        <span className="bg-clip-text"
                                             style={{
                                                 backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
                                             }}
@@ -582,30 +582,6 @@ export default function Home() {
                     <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                         © 2025 Dhruv Sharma. All rights reserved.
                     </p>
-                    <div className="flex gap-4">
-                        <Link
-                            href="https://github.com/Dhruv159"
-                            className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
-                            style={{
-                                '--tw-bg-opacity': '0.1',
-                                '--tw-text-opacity': '1'
-                            } as React.CSSProperties}
-                        >
-                            <Github className="h-4 w-4" />
-                            <span className="sr-only">GitHub</span>
-                        </Link>
-                        <Link
-                            href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
-                            className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
-                            style={{
-                                '--tw-bg-opacity': '0.1',
-                                '--tw-text-opacity': '1'
-                            } as React.CSSProperties}
-                        >
-                            <Linkedin className="h-4 w-4" />
-                            <span className="sr-only">LinkedIn</span>
-                        </Link>
-                    </div>
                 </div>
             </footer>
         </div>
