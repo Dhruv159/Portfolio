@@ -17,7 +17,9 @@ export default function Loader({ onComplete }: LoaderProps) {
                     setTimeout(onComplete, 500) // Small delay before hiding loader
                     return 100
                 }
-                return prevProgress + Math.random() * 15 + 5 // Random increment between 5-20
+                const increment = Math.random() * 10 + 5 // Random increment between 5-15
+                const newProgress = Math.min(prevProgress + increment, 100)
+                return newProgress
             })
         }, 200)
 

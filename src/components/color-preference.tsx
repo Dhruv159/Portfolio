@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Palette } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -56,11 +56,25 @@ const colorOptions = [
 
 export default function ColorPreference({ onColorChange, currentColor }: ColorPreferenceProps) {
     const [isOpen, setIsOpen] = useState(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
 
     const currentColorOption = colorOptions.find(option => option.value === currentColor) || colorOptions[0]
 
     return (
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
             <Button
                 variant="outline"
                 size="sm"

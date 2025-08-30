@@ -91,19 +91,17 @@ export default function ContactForm({ selectedColor = "default" }: ContactFormPr
             <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full text-white py-3 px-6 rounded-md font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                style={{ 
-                    cursor: 'pointer',
-                    background: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80)`
+                className="w-full group relative overflow-hidden rounded-md px-5 py-2.5 transition-all duration-300 ease-out dark:text-black"
+                style={{
+                    backgroundColor: getPrimaryColor(selectedColor)
                 }}
             >
                 {isSubmitting ? (
                     "Sending..."
                 ) : (
-                    <>
-                        <Send className="h-4 w-4 text-white" />
-                        Send Message
-                    </>
+                    <span className="flex items-center justify-center">
+                        Send Message <Send className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                 )}
             </Button>
         </form>

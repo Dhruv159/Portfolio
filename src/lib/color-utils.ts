@@ -42,17 +42,21 @@ export function getColorTheme(theme: string) {
 }
 
 export function getPrimaryColor(theme: string) {
-    return getColorTheme(theme).primary
+    const colorTheme = getColorTheme(theme)
+    return colorTheme.primary
 }
 
 export function getPrimaryLightColor(theme: string) {
-    return getColorTheme(theme).primaryLight
+    const colorTheme = getColorTheme(theme)
+    return colorTheme.primaryLight
 }
 
 export function getPrimaryHoverColor(theme: string) {
-    return getColorTheme(theme).primaryHover
+    const colorTheme = getColorTheme(theme)
+    return colorTheme.primaryHover
 }
 
 export function getGradientClass(theme: string) {
-    return getColorTheme(theme).gradient
+    const colorTheme = getColorTheme(theme)
+    return colorTheme.gradient
 } 

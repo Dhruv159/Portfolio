@@ -9,6 +9,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import ContactForm from "@/components/contact-form"
 import Loader from "@/components/loader"
 import ColorPreference from "@/components/color-preference"
+import IconBadge from "@/components/icon-badge"
 import { getPrimaryColor, getPrimaryLightColor, getGradientClass } from "@/lib/color-utils"
 
 type ContactCardProps = {
@@ -74,7 +75,7 @@ export default function Home() {
                             <span 
                                 className="font-bold text-xl text-transparent bg-clip-text"
                                 style={{ 
-                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
+                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80)`
                                 }}
                             >
                                 Dhruv Sharma
@@ -160,6 +161,7 @@ export default function Home() {
                                 ></span>
                             </Link>
                         </nav>
+                        <div className="h-6 w-px bg-border" />
                         <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
                         <ThemeToggle />
                         <Button 
@@ -500,15 +502,10 @@ export default function Home() {
                                     
                                     <div className="space-y-4">
                                         <div className="flex items-center gap-3">
-                                            <div 
-                                                className="flex h-10 w-10 items-center justify-center rounded-full"
-                                                style={{
-                                                    backgroundColor: getPrimaryLightColor(selectedColor),
-                                                    color: getPrimaryColor(selectedColor)
-                                                }}
-                                            >
-                                                <Mail className="h-5 w-5" />
-                                            </div>
+                                            <IconBadge 
+                                                icon={<Mail className="h-5 w-5" />}
+                                                selectedColor={selectedColor}
+                                            />
                                             <a 
                                                 href="mailto:dhruvsarkhandia9@gmail.com"
                                                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -518,15 +515,10 @@ export default function Home() {
                                         </div>
                                         
                                         <div className="flex items-center gap-3">
-                                            <div 
-                                                className="flex h-10 w-10 items-center justify-center rounded-full"
-                                                style={{
-                                                    backgroundColor: getPrimaryLightColor(selectedColor),
-                                                    color: getPrimaryColor(selectedColor)
-                                                }}
-                                            >
-                                                <Linkedin className="h-5 w-5" />
-                                            </div>
+                                            <IconBadge 
+                                                icon={<Linkedin className="h-5 w-5" />}
+                                                selectedColor={selectedColor}
+                                            />
                                             <a 
                                                 href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
                                                 target="_blank"
@@ -538,15 +530,10 @@ export default function Home() {
                                         </div>
                                         
                                         <div className="flex items-center gap-3">
-                                            <div 
-                                                className="flex h-10 w-10 items-center justify-center rounded-full"
-                                                style={{
-                                                    backgroundColor: getPrimaryLightColor(selectedColor),
-                                                    color: getPrimaryColor(selectedColor)
-                                                }}
-                                            >
-                                                <Github className="h-5 w-5" />
-                                            </div>
+                                            <IconBadge 
+                                                icon={<Github className="h-5 w-5" />}
+                                                selectedColor={selectedColor}
+                                            />
                                             <a 
                                                 href="https://github.com/Dhruv159"
                                                 target="_blank"
@@ -577,6 +564,10 @@ export default function Home() {
                         <Link
                             href="https://github.com/Dhruv159"
                             className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                            style={{
+                                '--tw-bg-opacity': '0.1',
+                                '--tw-text-opacity': '1'
+                            } as React.CSSProperties}
                         >
                             <Github className="h-4 w-4" />
                             <span className="sr-only">GitHub</span>
@@ -584,6 +575,10 @@ export default function Home() {
                         <Link
                             href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
                             className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                            style={{
+                                '--tw-bg-opacity': '0.1',
+                                '--tw-text-opacity': '1'
+                            } as React.CSSProperties}
                         >
                             <Linkedin className="h-4 w-4" />
                             <span className="sr-only">LinkedIn</span>
