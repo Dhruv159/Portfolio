@@ -50,7 +50,7 @@ export default function Home() {
 
     return (
         <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background">
-            <header className="sticky top-0 z-10 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+            <header className="sticky top-0 z-10 w-full border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
@@ -118,7 +118,7 @@ export default function Home() {
                 
                 {/* Mobile Navigation Menu */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                    <div className="md:hidden border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                         <nav className="container py-4 flex flex-col gap-4">
                             <Link 
                                 href="#about" 
@@ -210,6 +210,13 @@ export default function Home() {
                                     >
                                         <Linkedin className="h-5 w-5" />
                                         <span className="sr-only">LinkedIn</span>
+                                    </Link>
+                                    <Link
+                                        href="mailto:dhruvsarkhandia9@gmail.com"
+                                        className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                                    >
+                                        <Mail className="h-5 w-5" />
+                                        <span className="sr-only">Email</span>
                                     </Link>
                                 </div>
                             </div>
@@ -365,8 +372,11 @@ export default function Home() {
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto max-w-6xl">
                             <div className="text-center mb-12">
-                                <h2 className="text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
-                                    Get In Touch
+                                <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-4 inline-block">
+                                    Get in Touch
+                                </span>
+                                <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">
+                                    Let's Work Together
                                 </h2>
                             </div>
                             
