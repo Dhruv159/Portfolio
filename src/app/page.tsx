@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import ContactForm from "@/components/contact-form"
+import Loader from "@/components/loader"
 
 type ContactCardProps = {
     icon: React.ReactNode
@@ -18,6 +19,7 @@ type ContactCardProps = {
 export default function Home() {
     const [activeSection, setActiveSection] = useState("")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -48,9 +50,17 @@ export default function Home() {
         setIsMobileMenuOpen(!isMobileMenuOpen)
     }
 
+    const handleLoaderComplete = () => {
+        setIsLoading(false)
+    }
+
+    if (isLoading) {
+        return <Loader onComplete={handleLoaderComplete} />
+    }
+
     return (
-        <div className="flex min-h-screen flex-col bg-gradient-to-b from-background to-muted/30 dark:from-background dark:to-background">
-            <header className="sticky top-0 z-10 w-full border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+        <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-muted/30">
+            <header className="sticky top-0 z-10 w-full border-b border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 px-6">
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
@@ -118,7 +128,7 @@ export default function Home() {
                 
                 {/* Mobile Navigation Menu */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+                    <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
                         <nav className="container py-4 flex flex-col gap-4">
                             <Link 
                                 href="#about" 
@@ -162,7 +172,7 @@ export default function Home() {
             </header>
             <main className="flex-1">
                 <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 overflow-hidden relative">
-                    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-background to-background dark:from-primary/10 dark:via-background dark:to-background"></div>
+                    <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] dark:from-primary/10 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto max-w-4xl text-center">
                             <div className="flex flex-col justify-center space-y-4">
@@ -218,7 +228,7 @@ export default function Home() {
                     </div>
                 </section>
                 <section id="about" className="w-full py-12 md:py-24 lg:py-32 relative">
-                    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-muted/80 via-background to-background dark:from-muted/20 dark:via-background dark:to-background"></div>
+                    <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-muted/20 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
                             <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">About Me</span>
@@ -336,7 +346,7 @@ export default function Home() {
                     </div>
                 </section>
                 <section id="skills" className="w-full py-12 md:py-24 lg:py-32 relative">
-                    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-muted/80 via-background to-background dark:from-muted/20 dark:via-background dark:to-background"></div>
+                    <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] dark:from-muted/20 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
                             <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Expertise</span>
@@ -362,7 +372,7 @@ export default function Home() {
                     </div>
                 </section>
                 <section className="w-full py-12 md:py-24 lg:py-32 relative" id="contact">
-                    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background dark:from-primary/5 dark:via-background dark:to-background"></div>
+                    <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-primary/5 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto max-w-6xl">
                             <div className="text-center mb-12">
