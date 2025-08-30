@@ -23,7 +23,15 @@ export default function Home() {
     const [activeSection, setActiveSection] = useState("")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    const [selectedColor, setSelectedColor] = useState("default")
+    const [selectedColor, setSelectedColor] = useState("lavender")
+
+    // Load theme from localStorage on component mount
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('portfolio-theme')
+        if (savedTheme) {
+            setSelectedColor(savedTheme)
+        }
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -60,6 +68,7 @@ export default function Home() {
 
     const handleColorChange = (color: string) => {
         setSelectedColor(color)
+        localStorage.setItem('portfolio-theme', color)
     }
 
     if (isLoading) {
@@ -75,7 +84,7 @@ export default function Home() {
                             <span 
                                 className="font-bold text-xl text-transparent bg-clip-text"
                                 style={{ 
-                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80)`
+                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
                                 }}
                             >
                                 Dhruv Sharma
@@ -272,20 +281,33 @@ export default function Home() {
                                 <div className="flex gap-4 mt-4 justify-center">
                                     <Link
                                         href="https://github.com/Dhruv159"
-                                        className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary">
+                                        className="rounded-full p-2 transition-colors hover:opacity-80"
+                                        style={{
+                                            backgroundColor: getPrimaryLightColor(selectedColor),
+                                            color: getPrimaryColor(selectedColor)
+                                        }}
+                                    >
                                         <Github className="h-5 w-5" />
                                         <span className="sr-only">GitHub</span>
                                     </Link>
                                     <Link
                                         href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
-                                        className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                                        className="rounded-full p-2 transition-colors hover:opacity-80"
+                                        style={{
+                                            backgroundColor: getPrimaryLightColor(selectedColor),
+                                            color: getPrimaryColor(selectedColor)
+                                        }}
                                     >
                                         <Linkedin className="h-5 w-5" />
                                         <span className="sr-only">LinkedIn</span>
                                     </Link>
                                     <Link
                                         href="mailto:dhruvsarkhandia9@gmail.com"
-                                        className="rounded-full bg-muted p-2 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                                        className="rounded-full p-2 transition-colors hover:opacity-80"
+                                        style={{
+                                            backgroundColor: getPrimaryLightColor(selectedColor),
+                                            color: getPrimaryColor(selectedColor)
+                                        }}
                                     >
                                         <Mail className="h-5 w-5" />
                                         <span className="sr-only">Email</span>

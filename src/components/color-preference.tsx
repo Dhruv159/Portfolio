@@ -11,13 +11,6 @@ interface ColorPreferenceProps {
 
 const colorOptions = [
     {
-        name: "Default",
-        value: "default",
-        primary: "oklch(0.205 0 0)",
-        primaryLight: "oklch(0.205 0 0 / 0.1)",
-        primaryHover: "oklch(0.205 0 0 / 0.2)"
-    },
-    {
         name: "Lavender",
         value: "lavender",
         primary: "oklch(0.6 0.15 280)",

@@ -7,7 +7,7 @@ interface IconBadgeProps {
     className?: string
 }
 
-export default function IconBadge({ icon, selectedColor = "default", className = "" }: IconBadgeProps) {
+export default function IconBadge({ icon, selectedColor = "lavender", className = "" }: IconBadgeProps) {
     return (
         <div 
             className={`flex h-10 w-10 items-center justify-center rounded-full ${className}`}

@@ -14,7 +14,7 @@ interface ContactFormProps {
     selectedColor?: string
 }
 
-export default function ContactForm({ selectedColor = "default" }: ContactFormProps) {
+export default function ContactForm({ selectedColor = "lavender" }: ContactFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [formData, setFormData] = useState({
         name: "",

@@ -1,10 +1,4 @@
 export const colorThemes = {
-    default: {
-        primary: "oklch(0.205 0 0)",
-        primaryLight: "oklch(0.205 0 0 / 0.1)",
-        primaryHover: "oklch(0.205 0 0 / 0.2)",
-        gradient: "from-primary to-primary/60"
-    },
     lavender: {
         primary: "oklch(0.6 0.15 280)",
         primaryLight: "oklch(0.6 0.15 280 / 0.1)",
@@ -38,7 +32,7 @@ export const colorThemes = {
 }
 
 export function getColorTheme(theme: string) {
-    return colorThemes[theme as keyof typeof colorThemes] || colorThemes.default
+    return colorThemes[theme as keyof typeof colorThemes] || colorThemes.lavender
 }
 
 export function getPrimaryColor(theme: string) {
