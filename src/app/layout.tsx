@@ -18,14 +18,14 @@ children: React.ReactNode
 }) {
 return (
 <html lang="en" suppressHydrationWarning>
-            <head>
-                <meta name="color-scheme" content="light dark" />
-            </head>
-            <body className={inter.className}>
-                <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-                    {children}<Toaster/>
-                </ThemeProvider>
-            </body>
-        </html>
-    )
+              <head>
+                  <meta name="color-scheme" content="light dark" />
+              </head>
+              <body className={inter.className}>
+                  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+                      {children}<Toaster/>
+                  </ThemeProvider>
+              </body>
+          </html>
+      )
 }
