@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import ContactForm from "@/components/contact-form"
 import Loader from "@/components/loader"
+import ColorPreference from "@/components/color-preference"
+import { getPrimaryColor, getPrimaryLightColor, getGradientClass } from "@/lib/color-utils"
 
 type ContactCardProps = {
     icon: React.ReactNode
@@ -20,6 +22,7 @@ export default function Home() {
     const [activeSection, setActiveSection] = useState("")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [selectedColor, setSelectedColor] = useState("default")
 
     useEffect(() => {
         const handleScroll = () => {
@@ -54,6 +57,10 @@ export default function Home() {
         setIsLoading(false)
     }
 
+    const handleColorChange = (color: string) => {
+        setSelectedColor(color)
+    }
+
     if (isLoading) {
         return <Loader onComplete={handleLoaderComplete} />
     }
@@ -64,7 +71,14 @@ export default function Home() {
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
-                            <span className="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-primary/70">Dhruv Sharma</span>
+                            <span 
+                                className="font-bold text-xl text-transparent bg-clip-text"
+                                style={{ 
+                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
+                                }}
+                            >
+                                Dhruv Sharma
+                            </span>
                         </Link>
                     </div>
                     <div className="flex items-center gap-4">
@@ -74,46 +88,79 @@ export default function Home() {
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("about") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("about") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                             >
                                 About
-                                <span className={`absolute inset-x-0 -bottom-1 h-0.5 bg-primary transition-transform ${
-                                    isActive("about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                }`}></span>
+                                <span 
+                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
+                                        isActive("about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                                    }`}
+                                    style={{
+                                        backgroundColor: getPrimaryColor(selectedColor)
+                                    }}
+                                ></span>
                             </Link>
                             <Link
                                 href="#projects"
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("projects") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                             >
                                 Projects
-                                <span className={`absolute inset-x-0 -bottom-1 h-0.5 bg-primary transition-transform ${
-                                    isActive("projects") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                }`}></span>
+                                <span 
+                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
+                                        isActive("projects") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                                    }`}
+                                    style={{
+                                        backgroundColor: getPrimaryColor(selectedColor)
+                                    }}
+                                ></span>
                             </Link>
                             <Link 
                                 href="#skills" 
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("skills") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("skills") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                             >
                                 Skills
-                                <span className={`absolute inset-x-0 -bottom-1 h-0.5 bg-primary transition-transform ${
-                                    isActive("skills") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                }`}></span>
+                                <span 
+                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
+                                        isActive("skills") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                                    }`}
+                                    style={{
+                                        backgroundColor: getPrimaryColor(selectedColor)
+                                    }}
+                                ></span>
                             </Link>
                             <Link 
                                 href="#contact" 
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("contact") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                             >
                                 Contact
-                                <span className={`absolute inset-x-0 -bottom-1 h-0.5 bg-primary transition-transform ${
-                                    isActive("contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                }`}></span>
+                                <span 
+                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
+                                        isActive("contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                                    }`}
+                                    style={{
+                                        backgroundColor: getPrimaryColor(selectedColor)
+                                    }}
+                                ></span>
                             </Link>
                         </nav>
+                        <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
                         <ThemeToggle />
                         <Button 
                             variant="outline" 
@@ -135,6 +182,9 @@ export default function Home() {
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("about") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("about") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 About
@@ -144,6 +194,9 @@ export default function Home() {
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("projects") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Projects
@@ -153,6 +206,9 @@ export default function Home() {
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("skills") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("skills") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Skills
@@ -162,6 +218,9 @@ export default function Home() {
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("contact") ? "text-primary" : "text-muted-foreground"
                                 }`}
+                                style={{
+                                    color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined
+                                }}
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Contact
@@ -182,7 +241,11 @@ export default function Home() {
                                     </div> */}
                                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                         Hi, I&#39;m {''}
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-primary/70">
+                                        <span className="text-transparent bg-clip-text"
+                                            style={{
+                                                backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
+                                            }}
+                                        >
                                             Dhruv Sharma
                                         </span>
                                     </h1>
@@ -193,7 +256,10 @@ export default function Home() {
                                 <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
                                     <Button
                                         size="lg"
-                                        className="group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90 dark:text-black"
+                                        className="group relative overflow-hidden rounded-md px-5 py-2.5 transition-all duration-300 ease-out dark:text-black"
+                                        style={{
+                                            backgroundColor: getPrimaryColor(selectedColor)
+                                        }}
                                     >
                                         <Link href="#contact" className="flex items-center">
                                             Let's Connect
@@ -231,7 +297,15 @@ export default function Home() {
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-muted/80 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-                            <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">About Me</span>
+                            <span 
+                                className="rounded-full px-3 py-1 text-sm font-medium"
+                                style={{
+                                    backgroundColor: getPrimaryLightColor(selectedColor),
+                                    color: getPrimaryColor(selectedColor)
+                                }}
+                            >
+                                About Me
+                            </span>
                             <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">The Person Behind the Code</h2>
                             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                                 I&#39;m a passionate developer with a focus on creating intuitive and performant web applications. With
@@ -314,7 +388,15 @@ export default function Home() {
                 <section id="projects" className="w-full py-12 md:py-24 lg:py-32">
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-                            <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Projects</span>
+                            <span 
+                                className="rounded-full px-3 py-1 text-sm font-medium"
+                                style={{
+                                    backgroundColor: getPrimaryLightColor(selectedColor),
+                                    color: getPrimaryColor(selectedColor)
+                                }}
+                            >
+                                Projects
+                            </span>
                             <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Featured Projects</h2>
                             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                                 Check out some of my recent work.
@@ -349,7 +431,15 @@ export default function Home() {
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] dark:from-muted/80 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-                            <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">Expertise</span>
+                            <span 
+                                className="rounded-full px-3 py-1 text-sm font-medium"
+                                style={{
+                                    backgroundColor: getPrimaryLightColor(selectedColor),
+                                    color: getPrimaryColor(selectedColor)
+                                }}
+                            >
+                                Expertise
+                            </span>
                             <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Skills & Technologies</h2>
                             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                                 Technologies and tools I work with.
@@ -376,7 +466,13 @@ export default function Home() {
                     <div className="container px-4 md:px-6">
                         <div className="mx-auto max-w-6xl">
                             <div className="text-center mb-12">
-                                <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-4 inline-block">
+                                <span 
+                                    className="rounded-full px-3 py-1 text-sm font-medium mb-4 inline-block"
+                                    style={{
+                                        backgroundColor: getPrimaryLightColor(selectedColor),
+                                        color: getPrimaryColor(selectedColor)
+                                    }}
+                                >
                                     Get in Touch
                                 </span>
                                 <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">
@@ -388,7 +484,12 @@ export default function Home() {
                                 {/* Left Column - Contact Information */}
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="text-xl font-semibold text-primary mb-4">Contact Information</h3>
+                                        <h3 
+                                            className="text-xl font-semibold mb-4"
+                                            style={{ color: getPrimaryColor(selectedColor) }}
+                                        >
+                                            Contact Information
+                                        </h3>
                                         <p className="text-muted-foreground mb-4">
                                             I'm currently available for freelance work and full-time opportunities. If you have a project that needs some creative touch, I'd love to hear about it!
                                         </p>
@@ -399,7 +500,13 @@ export default function Home() {
                                     
                                     <div className="space-y-4">
                                         <div className="flex items-center gap-3">
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                            <div 
+                                                className="flex h-10 w-10 items-center justify-center rounded-full"
+                                                style={{
+                                                    backgroundColor: getPrimaryLightColor(selectedColor),
+                                                    color: getPrimaryColor(selectedColor)
+                                                }}
+                                            >
                                                 <Mail className="h-5 w-5" />
                                             </div>
                                             <a 
@@ -411,7 +518,13 @@ export default function Home() {
                                         </div>
                                         
                                         <div className="flex items-center gap-3">
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                            <div 
+                                                className="flex h-10 w-10 items-center justify-center rounded-full"
+                                                style={{
+                                                    backgroundColor: getPrimaryLightColor(selectedColor),
+                                                    color: getPrimaryColor(selectedColor)
+                                                }}
+                                            >
                                                 <Linkedin className="h-5 w-5" />
                                             </div>
                                             <a 
@@ -425,7 +538,13 @@ export default function Home() {
                                         </div>
                                         
                                         <div className="flex items-center gap-3">
-                                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                                            <div 
+                                                className="flex h-10 w-10 items-center justify-center rounded-full"
+                                                style={{
+                                                    backgroundColor: getPrimaryLightColor(selectedColor),
+                                                    color: getPrimaryColor(selectedColor)
+                                                }}
+                                            >
                                                 <Github className="h-5 w-5" />
                                             </div>
                                             <a 
@@ -442,7 +561,7 @@ export default function Home() {
                                 
                                 {/* Right Column - Contact Form */}
                                 <div className="bg-background rounded-lg border p-6 shadow-sm">
-                                    <ContactForm />
+                                    <ContactForm selectedColor={selectedColor} />
                                 </div>
                             </div>
                         </div>

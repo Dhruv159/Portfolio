@@ -8,8 +8,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { getPrimaryColor } from "@/lib/color-utils"
 
-export default function ContactForm() {
+interface ContactFormProps {
+    selectedColor?: string
+}
+
+export default function ContactForm({ selectedColor = "default" }: ContactFormProps) {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [formData, setFormData] = useState({
         name: "",
@@ -86,8 +91,11 @@ export default function ContactForm() {
             <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-3 px-6 rounded-md font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-                style={{ cursor: 'pointer' }}
+                className="w-full text-white py-3 px-6 rounded-md font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                style={{ 
+                    cursor: 'pointer',
+                    background: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80)`
+                }}
             >
                 {isSubmitting ? (
                     "Sending..."
