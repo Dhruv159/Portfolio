@@ -167,9 +167,9 @@ export default function Home() {
                         <div className="mx-auto max-w-4xl text-center">
                             <div className="flex flex-col justify-center space-y-4">
                                 <div className="space-y-2">
-                                    <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm text-muted-foreground">
+                                    {/* <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm text-muted-foreground">
                                         Available for freelance work
-                                    </div>
+                                    </div> */}
                                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                         Hi, I&#39;m {''}
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 dark:from-primary dark:to-primary/70">
@@ -186,14 +186,8 @@ export default function Home() {
                                         className="group relative overflow-hidden rounded-md bg-primary px-5 py-2.5 transition-all duration-300 ease-out hover:bg-primary/90 dark:text-black"
                                     >
                                         <Link href="#contact" className="flex items-center">
-                                            Contact Me
+                                            Let's Connect
                                             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                        </Link>
-                                    </Button>
-                                    <Button variant="outline" size="lg" className="group">
-                                        <Link href="#projects" className="flex items-center">
-                                            View My Work
-                                            <ArrowRight className="ml-2 h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
                                         </Link>
                                     </Button>
                                 </div>
