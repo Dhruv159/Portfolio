@@ -14,7 +14,6 @@ export default function ContactForm() {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        subject: "",
         message: "",
     })
 
@@ -37,7 +36,6 @@ export default function ContactForm() {
         setFormData({
             name: "",
             email: "",
-            subject: "",
             message: "",
         })
         setIsSubmitting(false)
@@ -66,19 +64,6 @@ export default function ContactForm() {
                     type="email"
                     placeholder="Your email"
                     value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
-                />
-            </div>
-
-            <div className="space-y-2">
-                <Label htmlFor="subject" className="text-sm font-medium">Subject</Label>
-                <Input
-                    id="subject"
-                    name="subject"
-                    placeholder="Subject"
-                    value={formData.subject}
                     onChange={handleChange}
                     required
                     className="transition-all rounded-md text-black dark:text-white bg-white dark:bg-zinc-900 focus-visible:ring-primary"
