@@ -113,7 +113,7 @@ export default function ContactForm({ selectedColor = "lavender" }: ContactFormP
             <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full group relative overflow-hidden rounded-md px-5 py-2.5 transition-all duration-300 ease-out dark:text-black"
+                className="w-full cursor-pointer group relative overflow-hidden rounded-md px-5 py-2.5 transition-all duration-300 ease-out dark:text-black"
                 style={{
                     backgroundColor: getPrimaryColor(selectedColor)
                 }}

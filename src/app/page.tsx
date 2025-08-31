@@ -515,10 +515,12 @@ export default function Home() {
                                             Contact Information
                                         </h3>
                                         <p className="text-muted-foreground mb-4">
-                                            I'm currently available for freelance work and full-time opportunities. If you have a project that needs some creative touch, I'd love to hear about it!
+                                            If you are seeking a dedicated professional to contribute creativity and expertise to your projects, I would be glad to discuss how I can add value to your team or organization.
+                                            {/* I'm currently available for freelance work and full-time opportunities. If you have a project that needs some creative touch, I'd love to hear about it! */}
                                         </p>
                                         <p className="text-muted-foreground mb-6">
-                                            Feel free to reach out through the contact form or via the following channels:
+                                            Feel free to reach out via the contact form or through the channels provided below.
+                                            {/* Feel free to reach out through the contact form or via the following channels: */}
                                         </p>
                                     </div>
                                     
