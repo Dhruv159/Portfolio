@@ -36,20 +36,20 @@ export default function Home() {
         }
     }, [])
 
-    // Automatic theme switching every 10 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSelectedColor(prevColor => {
-                const currentIndex = availableColors.indexOf(prevColor)
-                const nextIndex = (currentIndex + 1) % availableColors.length
-                const nextColor = availableColors[nextIndex]
-                localStorage.setItem('portfolio-theme', nextColor)
-                return nextColor
-            })
-        }, 10000) // 10 seconds
+    // // Automatic theme switching every 10 seconds
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setSelectedColor(prevColor => {
+    //             const currentIndex = availableColors.indexOf(prevColor)
+    //             const nextIndex = (currentIndex + 1) % availableColors.length
+    //             const nextColor = availableColors[nextIndex]
+    //             localStorage.setItem('portfolio-theme', nextColor)
+    //             return nextColor
+    //         })
+    //     }, 100000000000000)
 
-        return () => clearInterval(interval)
-    }, [])
+    //     return () => clearInterval(interval)
+    // }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -93,11 +93,11 @@ export default function Home() {
         e.preventDefault()
         if (typeof window !== 'undefined' && (window as any).Calendly) {
             const calendlyColors = getCalendlyColors(selectedColor);
-            const baseUrl = 'https://calendly.com/dhruvsarkhandia9/30min?hide_event_type_details=1&hide_gdpr_banner=1';
+            const baseUrl = 'https://calendly.com/dhruvsarkhandia9/30min?&month=2025-09?hide_event_type_details=1&hide_gdpr_banner=1';
             const colorParams = [
                 `primary_color=${encodeURIComponent(calendlyColors.primary_color)}`,
-                `text_color=${encodeURIComponent(calendlyColors.text_color)}`,
-                `background_color=${encodeURIComponent(calendlyColors.background_color)}`
+                // `text_color=${encodeURIComponent(calendlyColors.text_color)}`,
+                // `background_color=${encodeURIComponent(calendlyColors.background_color)}`
             ].join('&');
             
             (window as any).Calendly.initPopupWidget({
@@ -206,7 +206,7 @@ export default function Home() {
                             </Link>
                         </nav>
                         <div className="h-6 w-px bg-border" />
-                        {/* <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} /> */}
+                        <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
                         <ThemeToggle/>
                         <Button 
                             variant="outline" 
@@ -608,9 +608,7 @@ export default function Home() {
                                                 icon={<Calendar className="h-5 w-5" />}
                                                 selectedColor={selectedColor}
                                             />
-                                            <a 
-                                                href="#"
-                                                onClick={handleCalendlyClick}
+                                            <a  onClick={handleCalendlyClick}
                                                 className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                                             >
                                                 Schedule time with me

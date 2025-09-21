@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 
 // Initialize Resend with environment variable
-const resend = new Resend("re_123")
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Email configuration from environment variables
 const EMAIL_FROM = process.env.EMAIL_FROM || 'Portfolio Contact <noreply@resend.dev>'
@@ -30,7 +30,6 @@ export function createEmailTemplate(data: EmailData): string {
                     max-width: 600px;
                     margin: 0 auto;
                     padding: 20px;
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 }
                 .email-container {
                     background: white;
@@ -212,34 +211,29 @@ export function createEmailTemplate(data: EmailData): string {
                     <div class="field">
                         <div class="field-label">From</div>
                         <div class="field-value">
-                            ${data.name} <span class="highlight">${data.email}</span>
+                            ${data.name} ${data.email}</span>
                         </div>
                     </div>
                     
                     <div class="field">
                         <div class="field-label">Message</div>
-                        <div class="message-content">${data.message}</div>
+                        <div>${data.message}</div>
                     </div>
-                </div>
-                
-                <div class="contact-info">
-                    <h3>Quick Actions</h3>
-                    <p>📧 Reply directly to: <strong>${data.email}</strong></p>
-                    <p>👤 Contact name: <strong>${data.name}</strong></p>
                 </div>
                 
                 <div class="footer">
-                    <p>This message was sent from your portfolio contact form at dhruvsharma.dev</p>
-                    <div class="timestamp">
-                        📅 Sent on ${new Date().toLocaleString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            timeZoneName: 'short'
+                    <p>
+                        This message was sent from your portfolio contact form at 
+                        <a href="https://thedhruvsharma.com" target="_blank">thedhruvsharma.com</a><br/>
+                        ${new Date().toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        timeZoneName: 'short'
                         })}
-                    </div>
+                    </p>
                 </div>
             </div>
         </body>

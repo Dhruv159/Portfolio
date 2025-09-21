@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"]})
 
 export const metadata = {
 title: "Dhruv Sharma | Portfolio",
-description: "Personal portfolio website showcasing my projects and skills",
+description: "Personal portfolio website showcasing my skills and Expertise",
 }
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ return (
                   <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
                       {children}<Toaster/>
                   </ThemeProvider>
-                  <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive"/>
+                  <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" async/>
               </body>
           </html>
       )
