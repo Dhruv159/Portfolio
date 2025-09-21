@@ -585,36 +585,6 @@ export default function Home() {
                                                 github.com/Dhruv159
                                             </a>
                                         </div>
-                                        <div className="flex items-center gap-3">
-                                            <IconBadge 
-                                                icon={<Github className="h-5 w-5" />}
-                                                selectedColor={selectedColor}
-                                            />
-                                            <a 
-                                                href="https://github.com/Dhruv159"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="text-muted-foreground hover:text-primary transition-colors"
-                                            >
-                                                1:1 Meeting
-                                            </a>
-                                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                                     </div>
                                 </div>
                                 
