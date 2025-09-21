@@ -9,7 +9,7 @@ import ContactForm from "@/components/contact-form"
 import Loader from "@/components/loader"
 import ColorPreference from "@/components/color-preference"
 import IconBadge from "@/components/icon-badge"
-import { getPrimaryColor, getPrimaryLightColor, getGradientClass } from "@/lib/color-utils"
+import { getPrimaryColor, getPrimaryLightColor, getGradientClass, getCalendlyColors } from "@/lib/color-utils"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 type ContactCardProps = {
@@ -46,7 +46,7 @@ export default function Home() {
                 localStorage.setItem('portfolio-theme', nextColor)
                 return nextColor
             })
-        }, 100000) // 100 seconds
+        }, 10000) // 10 seconds
 
         return () => clearInterval(interval)
     }, [])
@@ -87,6 +87,23 @@ export default function Home() {
     const handleColorChange = (color: string) => {
         setSelectedColor(color)
         localStorage.setItem('portfolio-theme', color)
+    }
+
+    const handleCalendlyClick = (e: React.MouseEvent) => {
+        e.preventDefault()
+        if (typeof window !== 'undefined' && (window as any).Calendly) {
+            const calendlyColors = getCalendlyColors(selectedColor);
+            const baseUrl = 'https://calendly.com/dhruvsarkhandia9/30min?hide_event_type_details=1&hide_gdpr_banner=1';
+            const colorParams = [
+                `primary_color=${encodeURIComponent(calendlyColors.primary_color)}`,
+                `text_color=${encodeURIComponent(calendlyColors.text_color)}`,
+                `background_color=${encodeURIComponent(calendlyColors.background_color)}`
+            ].join('&');
+            
+            (window as any).Calendly.initPopupWidget({
+                url: `${baseUrl}&${colorParams}`
+            });
+        }
     }
 
     if (isLoading) {
@@ -592,14 +609,8 @@ export default function Home() {
                                                 selectedColor={selectedColor}
                                             />
                                             <a 
-                                                onClick={(e) => {
-                                                    e.preventDefault();
-                                                    if (typeof window !== 'undefined' && (window as any).Calendly) {
-                                                        (window as any).Calendly.initPopupWidget({
-                                                            url: 'https://calendly.com/dhruvsarkhandia9/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=b09797&text_color=685959&primary_color=323539'
-                                                        });
-                                                    }
-                                                }}
+                                                href="#"
+                                                onClick={handleCalendlyClick}
                                                 className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                                             >
                                                 Schedule time with me
