@@ -10,6 +10,7 @@ import Loader from "@/components/loader"
 import ColorPreference from "@/components/color-preference"
 import IconBadge from "@/components/icon-badge"
 import { getPrimaryColor, getPrimaryLightColor, getGradientClass } from "@/lib/color-utils"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 type ContactCardProps = {
     icon: React.ReactNode
@@ -45,7 +46,7 @@ export default function Home() {
                 localStorage.setItem('portfolio-theme', nextColor)
                 return nextColor
             })
-        }, 10000) // 10 seconds
+        }, 100000) // 100 seconds
 
         return () => clearInterval(interval)
     }, [])
@@ -188,7 +189,8 @@ export default function Home() {
                             </Link>
                         </nav>
                         <div className="h-6 w-px bg-border" />
-                        <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
+                        {/* <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} /> */}
+                        <ThemeToggle/>
                         <Button 
                             variant="outline" 
                             size="sm" 
@@ -583,6 +585,36 @@ export default function Home() {
                                                 github.com/Dhruv159
                                             </a>
                                         </div>
+                                        <div className="flex items-center gap-3">
+                                            <IconBadge 
+                                                icon={<Github className="h-5 w-5" />}
+                                                selectedColor={selectedColor}
+                                            />
+                                            <a 
+                                                href="https://github.com/Dhruv159"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-muted-foreground hover:text-primary transition-colors"
+                                            >
+                                                1:1 Meeting
+                                            </a>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     </div>
                                 </div>
                                 

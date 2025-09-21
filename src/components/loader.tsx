@@ -74,10 +74,9 @@ export default function Loader({ onComplete, selectedColor }: LoaderProps) {
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
-            <div className="text-center space-y-8">
+            <div className="text-center space-y-3">
                 <h1 className="text-3xl font-bold text-foreground">Dhruv Sharma</h1>
-                <p className="text-muted-foreground">Loading portfolio...</p>
-                
+                <p className="text-muted-foreground">Loading portfolio</p>
                 {/* Animated Dots - matching the image provided */}
                 <div className="flex justify-center items-center space-x-3">
                     {colorVariations.map((color, index) => (
@@ -85,8 +84,8 @@ export default function Loader({ onComplete, selectedColor }: LoaderProps) {
                             key={index}
                             className="rounded-full animate-pulse"
                             style={{
-                                width: `${12 + index * 4}px`, // Progressive sizing: 12px, 16px, 20px, 24px, 28px
-                                height: `${12 + index * 4}px`,
+                                width: `${4 + index * 2}px`, // Progressive sizing: 12px, 16px, 20px, 24px, 28px
+                                height: `${4 + index * 2}px`,
                                 backgroundColor: color,
                                 animationDelay: `${index * 0.2}s`,
                                 animationDuration: '1.5s'
@@ -94,7 +93,6 @@ export default function Loader({ onComplete, selectedColor }: LoaderProps) {
                         />
                     ))}
                 </div>
-                
                 {/* Percentage */}
                 <p className="text-muted-foreground font-medium">{Math.round(progress)}%</p>
             </div>
