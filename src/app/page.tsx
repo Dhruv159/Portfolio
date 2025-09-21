@@ -592,12 +592,11 @@ export default function Home() {
                                                 selectedColor={selectedColor}
                                             />
                                             <a 
-                                                href="#"
                                                 onClick={(e) => {
                                                     e.preventDefault();
                                                     if (typeof window !== 'undefined' && (window as any).Calendly) {
                                                         (window as any).Calendly.initPopupWidget({
-                                                            url: 'https://calendly.com/dhruvsarkhandia9/30min?hide_event_type_details=1&hide_gdpr_banner=1'
+                                                            url: 'https://calendly.com/dhruvsarkhandia9/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=b09797&text_color=685959&primary_color=323539'
                                                         });
                                                     }
                                                 }}
@@ -606,6 +605,7 @@ export default function Home() {
                                                 Schedule time with me
                                             </a>
                                         </div>
+
                                     </div>
                                 </div>
                                 

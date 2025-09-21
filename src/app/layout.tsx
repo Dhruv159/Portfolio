@@ -27,10 +27,7 @@ return (
                   <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
                       {children}<Toaster/>
                   </ThemeProvider>
-                  <Script 
-                      src="https://assets.calendly.com/assets/external/widget.js" 
-                      strategy="afterInteractive"
-                  />
+                  <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive"/>
               </body>
           </html>
       )
