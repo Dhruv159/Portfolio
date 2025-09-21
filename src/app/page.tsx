@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import Image from 'next/image'
-import { ArrowRight, Github, Linkedin, Mail, Menu, X } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Mail, Menu, X, Calendar } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -583,6 +583,27 @@ export default function Home() {
                                                 className="text-muted-foreground hover:text-primary transition-colors"
                                             >
                                                 github.com/Dhruv159
+                                            </a>
+                                        </div>
+                                        
+                                        <div className="flex items-center gap-3">
+                                            <IconBadge 
+                                                icon={<Calendar className="h-5 w-5" />}
+                                                selectedColor={selectedColor}
+                                            />
+                                            <a 
+                                                href="#"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    if (typeof window !== 'undefined' && (window as any).Calendly) {
+                                                        (window as any).Calendly.initPopupWidget({
+                                                            url: 'https://calendly.com/dhruvsarkhandia9/30min?hide_event_type_details=1&hide_gdpr_banner=1'
+                                                        });
+                                                    }
+                                                }}
+                                                className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                                            >
+                                                Schedule time with me
                                             </a>
                                         </div>
                                     </div>
