@@ -5,7 +5,6 @@ import { ArrowRight, Github, Linkedin, Mail, Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import ContactForm from "@/components/contact-form"
 import Loader from "@/components/loader"
 import ColorPreference from "@/components/color-preference"
@@ -25,12 +24,30 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [selectedColor, setSelectedColor] = useState("lavender")
 
+    // Available colors for automatic theme switching
+    const availableColors = ["lavender", "blue", "green", "purple", "teal"]
+
     // Load theme from localStorage on component mount
     useEffect(() => {
         const savedTheme = localStorage.getItem('portfolio-theme')
         if (savedTheme) {
             setSelectedColor(savedTheme)
         }
+    }, [])
+
+    // Automatic theme switching every 10 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSelectedColor(prevColor => {
+                const currentIndex = availableColors.indexOf(prevColor)
+                const nextIndex = (currentIndex + 1) % availableColors.length
+                const nextColor = availableColors[nextIndex]
+                localStorage.setItem('portfolio-theme', nextColor)
+                return nextColor
+            })
+        }, 10000) // 10 seconds
+
+        return () => clearInterval(interval)
     }, [])
 
     useEffect(() => {
@@ -72,7 +89,7 @@ export default function Home() {
     }
 
     if (isLoading) {
-        return <Loader onComplete={handleLoaderComplete} />
+        return <Loader onComplete={handleLoaderComplete} selectedColor={selectedColor} />
     }
 
     return (
@@ -172,7 +189,6 @@ export default function Home() {
                         </nav>
                         <div className="h-6 w-px bg-border" />
                         <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
-                        <ThemeToggle />
                         <Button 
                             variant="outline" 
                             size="sm" 
