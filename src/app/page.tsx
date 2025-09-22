@@ -1,16 +1,16 @@
 "use client"
 import Link from "next/link"
 import Image from 'next/image'
-import { ArrowRight, Github, Linkedin, Mail, Menu, X } from "lucide-react"
+import { ArrowRight, Github, Linkedin, Mail, Menu, X, Calendar } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
 import ContactForm from "@/components/contact-form"
 import Loader from "@/components/loader"
 import ColorPreference from "@/components/color-preference"
 import IconBadge from "@/components/icon-badge"
-import { getPrimaryColor, getPrimaryLightColor, getGradientClass } from "@/lib/color-utils"
+import { getPrimaryColor, getPrimaryLightColor, getGradientClass, getCalendlyColors } from "@/lib/color-utils"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 type ContactCardProps = {
     icon: React.ReactNode
@@ -25,6 +25,9 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [selectedColor, setSelectedColor] = useState("lavender")
 
+    // Available colors for automatic theme switching
+    const availableColors = ["lavender", "blue", "green", "purple", "teal"]
+
     // Load theme from localStorage on component mount
     useEffect(() => {
         const savedTheme = localStorage.getItem('portfolio-theme')
@@ -32,6 +35,21 @@ export default function Home() {
             setSelectedColor(savedTheme)
         }
     }, [])
+
+    // // Automatic theme switching every 10 seconds
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setSelectedColor(prevColor => {
+    //             const currentIndex = availableColors.indexOf(prevColor)
+    //             const nextIndex = (currentIndex + 1) % availableColors.length
+    //             const nextColor = availableColors[nextIndex]
+    //             localStorage.setItem('portfolio-theme', nextColor)
+    //             return nextColor
+    //         })
+    //     }, 100000000000000)
+
+    //     return () => clearInterval(interval)
+    // }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -71,8 +89,25 @@ export default function Home() {
         localStorage.setItem('portfolio-theme', color)
     }
 
+    const handleCalendlyClick = (e: React.MouseEvent) => {
+        e.preventDefault()
+        if (typeof window !== 'undefined' && (window as any).Calendly) {
+            const calendlyColors = getCalendlyColors(selectedColor);
+            const baseUrl = 'https://calendly.com/dhruvsarkhandia9/30min?&month=2025-09?hide_event_type_details=1&hide_gdpr_banner=1';
+            const colorParams = [
+                `primary_color=${encodeURIComponent(calendlyColors.primary_color)}`,
+                // `text_color=${encodeURIComponent(calendlyColors.text_color)}`,
+                // `background_color=${encodeURIComponent(calendlyColors.background_color)}`
+            ].join('&');
+            
+            (window as any).Calendly.initPopupWidget({
+                url: `${baseUrl}&${colorParams}`
+            });
+        }
+    }
+
     if (isLoading) {
-        return <Loader onComplete={handleLoaderComplete} />
+        return <Loader onComplete={handleLoaderComplete} selectedColor={selectedColor} />
     }
 
     return (
@@ -172,7 +207,7 @@ export default function Home() {
                         </nav>
                         <div className="h-6 w-px bg-border" />
                         <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
-                        <ThemeToggle />
+                        <ThemeToggle/>
                         <Button 
                             variant="outline" 
                             size="sm" 
@@ -567,6 +602,19 @@ export default function Home() {
                                                 github.com/Dhruv159
                                             </a>
                                         </div>
+                                        
+                                        <div className="flex items-center gap-3">
+                                            <IconBadge 
+                                                icon={<Calendar className="h-5 w-5" />}
+                                                selectedColor={selectedColor}
+                                            />
+                                            <a  onClick={handleCalendlyClick}
+                                                className="text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                                            >
+                                                Schedule time with me
+                                            </a>
+                                        </div>
+
                                     </div>
                                 </div>
                                 
