@@ -24,6 +24,7 @@ export default function Home() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [selectedColor, setSelectedColor] = useState("lavender")
+    const [activeProjectTab, setActiveProjectTab] = useState("personal")
 
     // Available colors for automatic theme switching
     const availableColors = ["lavender", "blue", "green", "purple", "teal"]
@@ -53,7 +54,7 @@ export default function Home() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const sections = ["about", "projects", "skills", "contact"]
+            const sections = ["about", "projects", "contact"]
             const scrollPosition = window.scrollY + 100
 
             for (const section of sections) {
@@ -75,6 +76,17 @@ export default function Home() {
     }, [])
 
     const isActive = (section: string) => activeSection === section
+
+    const scrollToSection = (sectionId: string) => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+            element.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            })
+        }
+        setIsMobileMenuOpen(false)
+    }
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -128,8 +140,8 @@ export default function Home() {
                     </div>
                     <div className="flex items-center gap-4">
                         <nav className="hidden md:flex gap-6">
-                            <Link 
-                                href="#about" 
+                            <button 
+                                onClick={() => scrollToSection("about")}
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("about") ? "text-primary" : "text-muted-foreground"
                                 }`}
@@ -146,9 +158,9 @@ export default function Home() {
                                         backgroundColor: getPrimaryColor(selectedColor)
                                     }}
                                 ></span>
-                            </Link>
-                            <Link
-                                href="#projects"
+                            </button>
+                            <button
+                                onClick={() => scrollToSection("projects")}
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("projects") ? "text-primary" : "text-muted-foreground"
                                 }`}
@@ -165,28 +177,9 @@ export default function Home() {
                                         backgroundColor: getPrimaryColor(selectedColor)
                                     }}
                                 ></span>
-                            </Link>
-                            <Link 
-                                href="#skills" 
-                                className={`group relative text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("skills") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("skills") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                Skills
-                                <span 
-                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
-                                        isActive("skills") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                    }`}
-                                    style={{
-                                        backgroundColor: getPrimaryColor(selectedColor)
-                                    }}
-                                ></span>
-                            </Link>
-                            <Link 
-                                href="#contact" 
+                            </button>
+                            <button 
+                                onClick={() => scrollToSection("contact")}
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("contact") ? "text-primary" : "text-muted-foreground"
                                 }`}
@@ -203,7 +196,7 @@ export default function Home() {
                                         backgroundColor: getPrimaryColor(selectedColor)
                                     }}
                                 ></span>
-                            </Link>
+                            </button>
                         </nav>
                         <div className="h-6 w-px bg-border" />
                         {/* <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} /> */}
@@ -223,54 +216,39 @@ export default function Home() {
                 {isMobileMenuOpen && (
                     <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
                         <nav className="container py-4 flex flex-col gap-4">
-                            <Link 
-                                href="#about" 
+                            <button 
+                                onClick={() => scrollToSection("about")}
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("about") ? "text-primary" : "text-muted-foreground"
                                 }`}
                                 style={{
                                     color: isActive("about") ? getPrimaryColor(selectedColor) : undefined
                                 }}
-                                onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 About
-                            </Link>
-                            <Link
-                                href="#projects"
+                            </button>
+                            <button
+                                onClick={() => scrollToSection("projects")}
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("projects") ? "text-primary" : "text-muted-foreground"
                                 }`}
                                 style={{
                                     color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined
                                 }}
-                                onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Projects
-                            </Link>
-                            <Link 
-                                href="#skills" 
-                                className={`text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("skills") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("skills") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                                Skills
-                            </Link>
-                            <Link 
-                                href="#contact" 
+                            </button>
+                            <button 
+                                onClick={() => scrollToSection("contact")}
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("contact") ? "text-primary" : "text-muted-foreground"
                                 }`}
                                 style={{
                                     color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined
                                 }}
-                                onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 Contact
-                            </Link>
+                            </button>
                         </nav>
                     </div>
                 )}
@@ -306,11 +284,12 @@ export default function Home() {
                                         style={{
                                             backgroundColor: getPrimaryColor(selectedColor)
                                         }}
+                                        onClick={() => scrollToSection("contact")}
                                     >
-                                        <Link href="#contact" className="flex items-center">
+                                        <span className="flex items-center">
                                             Let's Connect
                                             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                        </Link>
+                                        </span>
                                     </Button>
                                 </div>
                                 <div className="flex gap-4 mt-4 justify-center">
@@ -365,80 +344,127 @@ export default function Home() {
                             >
                                 About Me
                             </span>
-                            <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">The Person Behind the Code</h2>
-                            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                                I&#39;m a passionate developer with a focus on creating intuitive and performant web applications. With
-                                experience in both frontend and backend technologies, I enjoy bringing ideas to life through code.
-                            </p>
-                            <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
-                                <div className="group relative overflow-hidden rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md dark:bg-background/80">
-                                    <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
-                                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            className="h-6 w-6"
-                                        >
-                                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                                        </svg>
+                            <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Experience & Expertise</h2>
+                        </div>
+                        
+                        <div className="mx-auto max-w-6xl mt-12">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                {/* Left Column - Professional Journey */}
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center">
+                                            <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-semibold">Professional Journey</h3>
                                     </div>
-                                    <h3 className="text-xl font-bold">Education</h3>
-                                    <p className="text-muted-foreground">B.Tech in Computer Science and Engineering</p>
-                                    <p className="text-sm text-muted-foreground">SRM IST, 2019-2023</p>
+                                    <div className="space-y-4">
+                                        <p className="text-muted-foreground">
+                                            Automation Engineer at Keka Technologies with 3+ years of experience specializing in manual and automated testing across UI, API, and Performance domains.
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            Led QA lifecycle for three core modules, achieving <span className="font-semibold text-primary">70% reduction in production bugs</span> while maintaining less than <span className="font-semibold text-primary">1% bug escape rate</span> through comprehensive testing strategies.
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            Passionate about building scalable automation tools that bridge technical complexity with user accessibility, enabling teams to deliver high-quality software efficiently.
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="group relative overflow-hidden rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md dark:bg-background/80">
-                                    <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
-                                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            className="h-6 w-6"
-                                        >
-                                            <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
-                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="text-xl font-bold">Experience</h3>
-                                    <p className="text-muted-foreground">Software Engineer</p>
-                                    <p className="text-sm text-muted-foreground">Keka HR, 2023-Present</p>
+
+                                {/* Right Column - Key Metrics */}
+                                <div className="grid grid-cols-2 gap-4">
+                                    <MetricCard
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        value="70%"
+                                        title="Bug Reduction"
+                                        description="Reduced production bugs through comprehensive testing strategies"
+                                    />
+                                    <MetricCard
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        value="60%"
+                                        title="QA Productivity"
+                                        description="Enhanced team productivity with AI-driven automation tools"
+                                    />
+                                    <MetricCard
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        value="<1%"
+                                        title="Bug Escape Rate"
+                                        description="Maintained exceptional quality with comprehensive coverage"
+                                    />
+                                    <MetricCard
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        value="4+"
+                                        title="Team Leadership"
+                                        description="Led QA teams and mentored junior engineers"
+                                    />
                                 </div>
-                                <div className="group relative overflow-hidden rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md dark:bg-background/80">
-                                    <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100"></div>
-                                    <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth="2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            className="h-6 w-6"
-                                        >
-                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                                            <circle cx="12" cy="10" r="3" />
+                            </div>
+
+                            {/* Technical Skills Section */}
+                            <div className="mt-16">
+                                <div className="flex items-center gap-3 mb-8">
+                                    <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center">
+                                        <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                                         </svg>
                                     </div>
-                                    <h3 className="text-xl font-bold">Location</h3>
-                                    <p className="text-muted-foreground">Punjab, India</p>
-                                    <p className="text-sm text-muted-foreground">Available for remote work</p>
+                                    <h3 className="text-xl font-semibold">Technical Skills</h3>
+                                </div>
+                                
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    <SkillCategory
+                                        title="Automation & Testing"
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        skills={["WebdriverIO", "Playwright", "Postman", "RestSharp", "JMeter", "Cucumber", "Page Object Model", "Azure DevOps", "CI/CD Pipelines"]}
+                                    />
+                                    <SkillCategory
+                                        title="Frontend Development"
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        skills={["Angular 2+", "TypeScript", "JavaScript", "HTML", "CSS"]}
+                                    />
+                                    <SkillCategory
+                                        title="Tools & Platforms"
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                                            </svg>
+                                        }
+                                        skills={["Git", "GitHub", "VS Code", "Visual Studio", "SQL", "C#"]}
+                                    />
+                                    <SkillCategory
+                                        title="Languages"
+                                        icon={
+                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+                                        </svg>
+                                        }
+                                        skills={["English", "Hindi", "Telugu", "Kannada"]}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -461,63 +487,120 @@ export default function Home() {
                                 Check out some of my recent work.
                             </p>
                         </div>
-                        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-3">
-                            <ProjectCard
-                                title="Project One"
-                                description="A responsive web application built with React and Next.js"
-                                image="/placeholder.svg?height=300&width=400"
-                                link="#"
-                                tags={["React", "Next.js", "Tailwind"]}
-                            />
-                            <ProjectCard
-                                title="Project Two"
-                                description="An e-commerce platform with payment integration"
-                                image="/placeholder.svg?height=300&width=400"
-                                link="#"
-                                tags={["TypeScript", "Stripe", "MongoDB"]}
-                            />
-                            <ProjectCard
-                                title="Project Three"
-                                description="A mobile app built with React Native"
-                                image="/placeholder.svg?height=300&width=400"
-                                link="#"
-                                tags={["React Native", "Firebase", "Redux"]}
-                            />
-                        </div>
-                    </div>
-                </section>
-                <section id="skills" className="w-full py-12 md:py-24 lg:py-32 relative">
-                    <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] dark:from-muted/80 dark:via-background dark:to-background"></div>
-                    <div className="container px-4 md:px-6">
-                        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
-                            <span 
-                                className="rounded-full px-3 py-1 text-sm font-medium"
+                        
+                        {/* Project Filter Tabs */}
+                        <div className="flex justify-center mt-8 mb-12">
+                            <div className="inline-flex rounded-lg border border-border bg-muted p-1">
+                                <button
+                                    onClick={() => setActiveProjectTab("personal")}
+                                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                                        activeProjectTab === "personal" 
+                                            ? "bg-background text-foreground shadow-sm" 
+                                            : "text-muted-foreground hover:text-foreground"
+                                    }`}
+                                    style={{
+                                        backgroundColor: activeProjectTab === "personal" ? getPrimaryColor(selectedColor) : undefined,
+                                        color: activeProjectTab === "personal" ? "white" : undefined
+                                    }}
+                                >
+                                    Personal Projects
+                                </button>
+                                <button
+                                    onClick={() => setActiveProjectTab("company")}
+                                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                                        activeProjectTab === "company" 
+                                            ? "bg-background text-foreground shadow-sm" 
+                                            : "text-muted-foreground hover:text-foreground"
+                                    }`}
                                 style={{
-                                    backgroundColor: getPrimaryLightColor(selectedColor),
-                                    color: getPrimaryColor(selectedColor)
-                                }}
-                            >
-                                Expertise
-                            </span>
-                            <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Skills & Technologies</h2>
-                            <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-                                Technologies and tools I work with.
-                            </p>
+                                        backgroundColor: activeProjectTab === "company" ? getPrimaryColor(selectedColor) : undefined,
+                                        color: activeProjectTab === "company" ? "white" : undefined
+                                    }}
+                                >
+                                    Company Projects
+                                </button>
+                            </div>
                         </div>
-                        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 py-12 md:grid-cols-3 lg:grid-cols-4">
-                            <SkillCard name="React" level="Advanced" icon="⚛️" />
-                            <SkillCard name="Next.js" level="Advanced" icon="▲" />
-                            <SkillCard name="TypeScript" level="Advanced" icon="TS" />
-                            <SkillCard name="JavaScript" level="Advanced" icon="JS" />
-                            <SkillCard name="HTML/CSS" level="Advanced" icon="🌐" />
-                            <SkillCard name="Tailwind CSS" level="Advanced" icon="🎨" />
-                            <SkillCard name="Node.js" level="Intermediate" icon="🟢" />
-                            <SkillCard name="Express" level="Intermediate" icon="🚂" />
-                            <SkillCard name="MongoDB" level="Intermediate" icon="🍃" />
-                            <SkillCard name="PostgreSQL" level="Intermediate" icon="🐘" />
-                            <SkillCard name="Git" level="Advanced" icon="🔄" />
-                            <SkillCard name="Docker" level="Beginner" icon="🐳" />
+
+                        {/* Personal Projects */}
+                        {activeProjectTab === "personal" && (
+                            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                                <PersonalProjectCard
+                                    category="Algorithm Visualization"
+                                    title="Bubble Sort Visualizer"
+                                    description="Interactive algorithm visualization with step-by-step animation and educational controls"
+                                    technologies={["JavaScript", "HTML5", "CSS3", "Animation"]}
+                                    link="#"
+                                />
+                                <PersonalProjectCard
+                                    category="Interactive Game"
+                                    title="Pop Game"
+                                    description="Engaging bubble-popping game with score tracking and responsive design"
+                                    technologies={["JavaScript", "Canvas API", "CSS3"]}
+                                    link="#"
+                                />
+                                <PersonalProjectCard
+                                    category="Framework Demo"
+                                    title="Angular 19 Showcase"
+                                    description="Modern Angular application demonstrating latest features and best practices"
+                                    technologies={["Angular 19", "TypeScript", "RxJS"]}
+                                    link="#"
+                                />
+                                <PersonalProjectCard
+                                    category="Productivity App"
+                                    title="Todo Application"
+                                    description="Feature-rich task management application with local storage and intuitive interface"
+                                    technologies={["JavaScript", "Local Storage", "CSS3"]}
+                                    link="#"
+                                />
+                                <PersonalProjectCard
+                                    category="Educational Game"
+                                    title="Math Question Game"
+                                    description="Educational game with multiple difficulty levels and progress tracking"
+                                    technologies={["JavaScript", "HTML5", "CSS3"]}
+                                    link="#"
+                                />
+                                <PersonalProjectCard
+                                    category="UI Clone"
+                                    title="Spotify Clone"
+                                    description="Music streaming interface with responsive design and modern UI components"
+                                    technologies={["JavaScript", "CSS3", "HTML5"]}
+                                    link="#"
+                                />
+                            </div>
+                        )}
+
+                        {/* Company Projects */}
+                        {activeProjectTab === "company" && (
+                            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+                                <CompanyProjectCard
+                                    title="Natural Language Driven Automation Tool"
+                                    description="AI-powered tool using Playwright and Cursor that converts plain English test scenarios into executable code, enabling QAs to create tests with minimal programming knowledge."
+                                    technologies={["Playwright", "Cursor AI", "TypeScript", "Page Object Model"]}
+                                    impact="60% boost in QA productivity"
+                                    benefits={[
+                                        "AI-driven test generation from natural language",
+                                        "Self-healing mechanism for dynamic locators",
+                                        "Reduced barrier for non-technical testers",
+                                        "Enhanced early-stage test coverage"
+                                    ]}
+                                    link="#"
+                                />
+                                <CompanyProjectCard
+                                    title="Component-Based WebdriverIO Tool"
+                                    description="Scalable automation framework with component-based architecture, designed for dynamic UI environments with frontend-aligned structure."
+                                    technologies={["WebdriverIO", "Page Object Model", "TypeScript", "Component Architecture"]}
+                                    impact="40% reduction in framework learning effort"
+                                    benefits={[
+                                        "Reusable UI components for better alignment",
+                                        "Advanced locator strategy for unstable elements",
+                                        "Centralized element handling wrapper",
+                                        "Resilient to UI changes with smart waits"
+                                    ]}
+                                    link="#"
+                                />
                         </div>
+                        )}
                     </div>
                 </section>
                 <section className="w-full py-12 md:py-24 lg:py-32 relative" id="contact">
@@ -640,29 +723,29 @@ export default function Home() {
     )
 }
 
-function ProjectCard({ title, description, image, link, tags }) {
+function PersonalProjectCard({ category, title, description, technologies, link }) {
     return (
         <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md dark:bg-background/80">
-            <div className="aspect-video overflow-hidden">
-                <Image
-                    src={image || "/placeholder.svg"}
-                    alt={title}
-                    width={400}
-                    height={300}
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-            </div>
             <div className="p-6">
-                <h3 className="text-xl font-bold">{title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                    {tags &&
-                        tags.map((tag, i) => (
+                <div className="flex items-start justify-between mb-4">
+                    <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                        {category}
+                    </span>
+                    <div className="h-5 w-5 rounded border border-muted-foreground/20 flex items-center justify-center">
+                        <svg className="h-3 w-3 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                    </div>
+                </div>
+                <h3 className="text-xl font-bold mb-2">{title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {technologies.map((tech, i) => (
                             <span
                                 key={i}
-                                className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold text-muted-foreground"
+                            className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
                             >
-                                {tag}
+                            {tech}
                             </span>
                         ))}
                 </div>
@@ -671,7 +754,7 @@ function ProjectCard({ title, description, image, link, tags }) {
                         href={link}
                         className="inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary/80"
                     >
-                        View Project
+                        View Demo
                         <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
                 </div>
@@ -680,15 +763,83 @@ function ProjectCard({ title, description, image, link, tags }) {
     )
 }
 
-function SkillCard({ name, level, icon }) {
+function CompanyProjectCard({ title, description, technologies, impact, benefits, link }) {
+    return (
+        <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md dark:bg-background/80">
+            <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                    <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center">
+                        <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-primary">{title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                    {technologies.map((tech, i) => (
+                        <span
+                            key={i}
+                            className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
+                        >
+                            {tech}
+                        </span>
+                    ))}
+                </div>
+                <div className="bg-primary/5 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                        <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center">
+                            <svg className="h-3 w-3 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <span className="text-sm font-medium text-primary">Impact: {impact}</span>
+                    </div>
+                    <ul className="space-y-1">
+                        {benefits.map((benefit, i) => (
+                            <li key={i} className="text-sm text-primary flex items-start gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span>{benefit}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function MetricCard({ icon, value, title, description }) {
     return (
         <div className="group flex flex-col items-center gap-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/50 dark:bg-background/80">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary/20">
-                <span className="text-lg">{icon}</span>
+                {icon}
             </div>
-            <h3 className="text-lg font-semibold">{name}</h3>
-            <div className="mt-1 inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
-                {level}
+            <div className="text-2xl font-bold text-primary">{value}</div>
+            <h3 className="text-lg font-semibold text-center">{title}</h3>
+            <p className="text-sm text-muted-foreground text-center">{description}</p>
+        </div>
+    )
+}
+
+function SkillCategory({ title, icon, skills }) {
+    return (
+        <div className="space-y-4">
+            <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded bg-primary/10 flex items-center justify-center">
+                    {icon}
+                </div>
+                <h4 className="font-semibold">{title}</h4>
+            </div>
+            <div className="flex flex-wrap gap-2">
+                {skills.map((skill, i) => (
+                    <span
+                        key={i}
+                        className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
+                    >
+                        {skill}
+                    </span>
+                ))}
             </div>
         </div>
     )
