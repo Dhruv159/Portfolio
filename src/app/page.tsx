@@ -93,7 +93,12 @@ export default function Home() {
         e.preventDefault()
         if (typeof window !== 'undefined' && (window as any).Calendly) {
             const calendlyColors = getCalendlyColors(selectedColor);
-            const baseUrl = 'https://calendly.com/dhruvsarkhandia9/30min?&month=2025-09?hide_event_type_details=1&hide_gdpr_banner=1';
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+
+            const baseUrl = `https://calendly.com/dhruvsarkhandia9/30min?&month=${year}-${month}?hide_event_type_details=1&hide_gdpr_banner=1`;
+
             const colorParams = [
                 `primary_color=${encodeURIComponent(calendlyColors.primary_color)}`,
                 // `text_color=${encodeURIComponent(calendlyColors.text_color)}`,
