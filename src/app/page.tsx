@@ -134,7 +134,7 @@ export default function Home() {
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
                             <span 
-                                className="font-bold text-xl bg-clip-text"
+                                className="font-bold text-xl bg-clip-text text-transparent"
                                 style={{ 
                                     backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
                                 }}
@@ -144,7 +144,7 @@ export default function Home() {
                         </Link>
                     </div>
                     <div className="flex items-center gap-4">
-                        <nav className="hidden md:flex gap-6">
+                        <nav className="hidden md:flex gap-8">
                             <button 
                                 onClick={() => scrollToSection("about")}
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
@@ -260,17 +260,42 @@ export default function Home() {
             </header>
             <main className="flex-1">
                 <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 overflow-hidden relative">
+                    {/* Gradient Background */}
+                    <div 
+                        className="absolute inset-0 -z-10"
+                        style={{
+                            background: `linear-gradient(135deg, ${getPrimaryLightColor(selectedColor)} 0%, transparent 50%, ${getPrimaryLightColor(selectedColor)} 100%)`
+                        }}
+                    ></div>
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] dark:from-primary/20 dark:via-background dark:to-background"></div>
-                    <div className="container px-4 md:px-6">
-                        <div className="mx-auto max-w-4xl text-center">
-                            <div className="flex flex-col justify-center space-y-4">
-                                <div className="space-y-2">
-                                    {/* <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm text-muted-foreground">
-                                        Available for freelance work
-                                    </div> */}
+                    
+                    <div className="container px-4 md:px-6 mx-auto">
+                        <div className="max-w-4xl mx-auto text-center">
+                            <div className="flex flex-col justify-center space-y-6">
+                                {/* Logo SVG */}
+                                <div className="flex justify-center mb-4">
+                                    <div 
+                                        className="w-16 h-16 rounded-full flex items-center justify-center"
+                                        style={{
+                                            backgroundColor: getPrimaryLightColor(selectedColor)
+                                        }}
+                                    >
+                                        <svg 
+                                            className="w-8 h-8" 
+                                            fill="currentColor" 
+                                            viewBox="0 0 24 24"
+                                            style={{ color: getPrimaryColor(selectedColor) }}
+                                        >
+                                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <div className="space-y-4">
                                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                         Hi, I&#39;m {''}
-                                        <span className="bg-clip-text"
+                                        <span 
+                                            className="bg-clip-text text-transparent"
                                             style={{
                                                 backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
                                             }}
@@ -282,12 +307,23 @@ export default function Home() {
                                         I&#39;m a developer focused on building efficient, user-friendly, and visually polished web applications.
                                     </p>
                                 </div>
+                                
                                 <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
                                     <Button
                                         size="lg"
-                                        className="group relative overflow-hidden rounded-md px-5 py-2.5 transition-all duration-300 ease-out dark:text-black"
+                                        className="group relative overflow-hidden rounded-md px-6 py-3 transition-all duration-300 ease-out border-2"
                                         style={{
-                                            backgroundColor: getPrimaryColor(selectedColor)
+                                            backgroundColor: 'transparent',
+                                            borderColor: getPrimaryColor(selectedColor),
+                                            color: getPrimaryColor(selectedColor)
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = getPrimaryColor(selectedColor);
+                                            e.currentTarget.style.color = 'white';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = 'transparent';
+                                            e.currentTarget.style.color = getPrimaryColor(selectedColor);
                                         }}
                                         onClick={() => scrollToSection("contact")}
                                     >
@@ -297,10 +333,11 @@ export default function Home() {
                                         </span>
                                     </Button>
                                 </div>
-                                <div className="flex gap-4 mt-4 justify-center">
+                                
+                                <div className="flex gap-4 mt-6 justify-center">
                                     <Link
                                         href="https://github.com/Dhruv159"
-                                        className="rounded-full p-2 transition-colors hover:opacity-80"
+                                        className="rounded-full p-3 transition-all duration-300 hover:scale-110"
                                         style={{
                                             backgroundColor: getPrimaryLightColor(selectedColor),
                                             color: getPrimaryColor(selectedColor)
@@ -311,7 +348,7 @@ export default function Home() {
                                     </Link>
                                     <Link
                                         href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
-                                        className="rounded-full p-2 transition-colors hover:opacity-80"
+                                        className="rounded-full p-3 transition-all duration-300 hover:scale-110"
                                         style={{
                                             backgroundColor: getPrimaryLightColor(selectedColor),
                                             color: getPrimaryColor(selectedColor)
@@ -322,7 +359,7 @@ export default function Home() {
                                     </Link>
                                     <Link
                                         href="mailto:dhruvsarkhandia9@gmail.com"
-                                        className="rounded-full p-2 transition-colors hover:opacity-80"
+                                        className="rounded-full p-3 transition-all duration-300 hover:scale-110"
                                         style={{
                                             backgroundColor: getPrimaryLightColor(selectedColor),
                                             color: getPrimaryColor(selectedColor)
@@ -357,8 +394,18 @@ export default function Home() {
                                 {/* Left Column - Professional Journey */}
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3 mb-6">
-                                        <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center">
-                                            <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                        <div 
+                                            className="h-10 w-10 rounded-full flex items-center justify-center"
+                                            style={{
+                                                backgroundColor: getPrimaryLightColor(selectedColor)
+                                            }}
+                                        >
+                                            <svg 
+                                                className="h-5 w-5" 
+                                                fill="currentColor" 
+                                                viewBox="0 0 20 20"
+                                                style={{ color: getPrimaryColor(selectedColor) }}
+                                            >
                                                 <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                                             </svg>
                                         </div>
@@ -388,6 +435,7 @@ export default function Home() {
                                         value="70%"
                                         title="Bug Reduction"
                                         description="Reduced production bugs through comprehensive testing strategies"
+                                        selectedColor={selectedColor}
                                     />
                                     <MetricCard
                                         icon={
@@ -398,6 +446,7 @@ export default function Home() {
                                         value="60%"
                                         title="QA Productivity"
                                         description="Enhanced team productivity with AI-driven automation tools"
+                                        selectedColor={selectedColor}
                                     />
                                     <MetricCard
                                         icon={
@@ -408,6 +457,7 @@ export default function Home() {
                                         value="<1%"
                                         title="Bug Escape Rate"
                                         description="Maintained exceptional quality with comprehensive coverage"
+                                        selectedColor={selectedColor}
                                     />
                                     <MetricCard
                                         icon={
@@ -418,20 +468,31 @@ export default function Home() {
                                         value="4+"
                                         title="Team Leadership"
                                         description="Led QA teams and mentored junior engineers"
+                                        selectedColor={selectedColor}
                                     />
                                 </div>
                             </div>
 
-                            {/* Technical Skills Section */}
-                            <div className="mt-16">
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center">
-                                        <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
+                                {/* Technical Skills Section */}
+                                <div className="mt-16">
+                                    <div className="flex items-center gap-3 mb-8">
+                                        <div 
+                                            className="h-10 w-10 rounded-full flex items-center justify-center"
+                                            style={{
+                                                backgroundColor: getPrimaryLightColor(selectedColor)
+                                            }}
+                                        >
+                                            <svg 
+                                                className="h-5 w-5" 
+                                                fill="currentColor" 
+                                                viewBox="0 0 20 20"
+                                                style={{ color: getPrimaryColor(selectedColor) }}
+                                            >
+                                                <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <h3 className="text-xl font-semibold">Technical Skills</h3>
                                     </div>
-                                    <h3 className="text-xl font-semibold">Technical Skills</h3>
-                                </div>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     <SkillCategory
@@ -442,6 +503,7 @@ export default function Home() {
                                             </svg>
                                         }
                                         skills={["WebdriverIO", "Playwright", "Postman", "RestSharp", "JMeter", "Cucumber", "Page Object Model", "Azure DevOps", "CI/CD Pipelines"]}
+                                        selectedColor={selectedColor}
                                     />
                                     <SkillCategory
                                         title="Frontend Development"
@@ -451,6 +513,7 @@ export default function Home() {
                                             </svg>
                                         }
                                         skills={["Angular 2+", "TypeScript", "JavaScript", "HTML", "CSS"]}
+                                        selectedColor={selectedColor}
                                     />
                                     <SkillCategory
                                         title="Tools & Platforms"
@@ -460,6 +523,7 @@ export default function Home() {
                                             </svg>
                                         }
                                         skills={["Git", "GitHub", "VS Code", "Visual Studio", "SQL", "C#"]}
+                                        selectedColor={selectedColor}
                                     />
                                     <SkillCategory
                                         title="Languages"
@@ -469,6 +533,7 @@ export default function Home() {
                                         </svg>
                                         }
                                         skills={["English", "Hindi", "Telugu", "Kannada"]}
+                                        selectedColor={selectedColor}
                                     />
                                 </div>
                             </div>
@@ -812,25 +877,44 @@ function CompanyProjectCard({ title, description, technologies, impact, benefits
     )
 }
 
-function MetricCard({ icon, value, title, description }) {
+function MetricCard({ icon, value, title, description, selectedColor }) {
     return (
         <div className="group flex flex-col items-center gap-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/50 dark:bg-background/80">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary/20">
-                {icon}
+            <div 
+                className="flex h-12 w-12 items-center justify-center rounded-full group-hover:scale-110 transition-transform"
+                style={{
+                    backgroundColor: getPrimaryLightColor(selectedColor)
+                }}
+            >
+                <div style={{ color: getPrimaryColor(selectedColor) }}>
+                    {icon}
+                </div>
             </div>
-            <div className="text-2xl font-bold text-primary">{value}</div>
+            <div 
+                className="text-2xl font-bold"
+                style={{ color: getPrimaryColor(selectedColor) }}
+            >
+                {value}
+            </div>
             <h3 className="text-lg font-semibold text-center">{title}</h3>
             <p className="text-sm text-muted-foreground text-center">{description}</p>
         </div>
     )
 }
 
-function SkillCategory({ title, icon, skills }) {
+function SkillCategory({ title, icon, skills, selectedColor }) {
     return (
         <div className="space-y-4">
             <div className="flex items-center gap-3">
-                <div className="h-8 w-8 rounded bg-primary/10 flex items-center justify-center">
-                    {icon}
+                <div 
+                    className="h-8 w-8 rounded-full flex items-center justify-center"
+                    style={{
+                        backgroundColor: getPrimaryLightColor(selectedColor)
+                    }}
+                >
+                    <div style={{ color: getPrimaryColor(selectedColor) }}>
+                        {icon}
+                    </div>
                 </div>
                 <h4 className="font-semibold">{title}</h4>
             </div>
@@ -838,7 +922,11 @@ function SkillCategory({ title, icon, skills }) {
                 {skills.map((skill, i) => (
                     <span
                         key={i}
-                        className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
+                        className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
+                        style={{
+                            backgroundColor: getPrimaryLightColor(selectedColor),
+                            color: getPrimaryColor(selectedColor)
+                        }}
                     >
                         {skill}
                     </span>
