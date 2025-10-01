@@ -128,15 +128,17 @@ export default function Home() {
     }
 
     return (
-        <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-background">
+        <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-background mx-auto max-w-full">
             <header className="sticky top-0 z-10 w-full border-b border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 px-6">
                 <div className="container flex h-16 items-center justify-between">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
                             <span 
-                                className="font-bold text-xl bg-clip-text text-transparent"
+                                className="font-bold text-xl bg-clip-text"
                                 style={{ 
-                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
+                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`,
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent'
                                 }}
                             >
                                 Dhruv Sharma
@@ -295,9 +297,11 @@ export default function Home() {
                                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                         Hi, I&#39;m {''}
                                         <span 
-                                            className="bg-clip-text text-transparent"
+                                            className="bg-clip-text"
                                             style={{
-                                                backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`
+                                                backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`,
+                                                WebkitBackgroundClip: 'text',
+                                                WebkitTextFillColor: 'transparent'
                                             }}
                                         >
                                             Dhruv Sharma
@@ -375,8 +379,8 @@ export default function Home() {
                 </section>
                 <section id="about" className="w-full py-12 md:py-24 lg:py-32 relative">
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-muted/80 dark:via-background dark:to-background"></div>
-                    <div className="container px-4 md:px-6">
-                        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+                    <div className="container px-4 md:px-6 mx-auto">
+                        <div className="max-w-[58rem] mx-auto flex flex-col items-center justify-center gap-4 text-center">
                             <span 
                                 className="rounded-full px-3 py-1 text-sm font-medium"
                                 style={{
@@ -541,8 +545,8 @@ export default function Home() {
                     </div>
                 </section>
                 <section id="projects" className="w-full py-12 md:py-24 lg:py-32">
-                    <div className="container px-4 md:px-6">
-                        <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
+                    <div className="container px-4 md:px-6 mx-auto">
+                        <div className="max-w-[58rem] mx-auto flex flex-col items-center justify-center gap-4 text-center">
                             <span 
                                 className="rounded-full px-3 py-1 text-sm font-medium"
                                 style={{
@@ -675,8 +679,8 @@ export default function Home() {
                 </section>
                 <section className="w-full py-12 md:py-24 lg:py-32 relative" id="contact">
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] dark:from-primary/10 dark:via-background dark:to-background"></div>
-                    <div className="container px-4 md:px-6">
-                        <div className="mx-auto max-w-6xl">
+                    <div className="container px-4 md:px-6 mx-auto">
+                        <div className="max-w-6xl mx-auto">
                             <div className="text-center mb-12">
                                 <span 
                                     className="rounded-full px-3 py-1 text-sm font-medium mb-4 inline-block"
@@ -781,7 +785,7 @@ export default function Home() {
                 </section>
             </main>
             <footer className="w-full border-t py-8 bg-muted/30 dark:bg-muted/10">
-                <div className="container flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
+                <div className="container mx-auto flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
                     <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                         © 2025 Dhruv Sharma. All rights reserved.
                     </p>
