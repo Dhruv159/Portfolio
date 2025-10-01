@@ -37,20 +37,20 @@ export default function Home() {
         }
     }, [])
 
-    // // Automatic theme switching every 10 seconds
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         setSelectedColor(prevColor => {
-    //             const currentIndex = availableColors.indexOf(prevColor)
-    //             const nextIndex = (currentIndex + 1) % availableColors.length
-    //             const nextColor = availableColors[nextIndex]
-    //             localStorage.setItem('portfolio-theme', nextColor)
-    //             return nextColor
-    //         })
-    //     }, 100000000000000)
-
-    //     return () => clearInterval(interval)
-    // }, [])
+    // Automatic theme switching every 30 minutes
+    useEffect(() => {
+        const interval = setInterval(() => {
+        setSelectedColor(prevColor => {
+            const currentIndex = availableColors.indexOf(prevColor);
+            const nextIndex = (currentIndex + 1) % availableColors.length;
+            const nextColor = availableColors[nextIndex];
+            localStorage.setItem('portfolio-theme', nextColor);
+            return nextColor;
+        });
+        }, 30 * 60 * 1000); // 30 minutes
+    
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -143,8 +143,8 @@ export default function Home() {
                             </span>
                         </Link>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <nav className="hidden md:flex gap-8">
+                    <div className="flex items-center gap-8">
+                        <nav className="hidden md:flex gap-10">
                             <button 
                                 onClick={() => scrollToSection("about")}
                                 className={`group relative text-sm font-medium transition-colors hover:text-primary ${
@@ -204,7 +204,7 @@ export default function Home() {
                             </button>
                         </nav>
                         <div className="h-6 w-px bg-border" />
-                        <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} />
+                        {/* <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} /> */}
                         <ThemeToggle/>
                         <Button 
                             variant="outline" 
