@@ -17,12 +17,6 @@ export const colorThemes = {
         primaryHover: "oklch(0.6 0.2 140 / 0.2)",
         gradient: "from-[oklch(0.6_0.2_140)] to-[oklch(0.6_0.2_140/0.6)]"
     },
-    purple: {
-        primary: "oklch(0.5 0.25 300)",
-        primaryLight: "oklch(0.5 0.25 300 / 0.1)",
-        primaryHover: "oklch(0.5 0.25 300 / 0.2)",
-        gradient: "from-[oklch(0.5_0.25_300)] to-[oklch(0.5_0.25_300/0.6)]"
-    },
     teal: {
         primary: "oklch(0.6 0.15 180)",
         primaryLight: "oklch(0.6 0.15 180 / 0.1)",
@@ -71,11 +65,6 @@ const themeHexColors = {
         primary: '#10B981',
         light: '#ECFDF5',
         text: '#047857'
-    },
-    purple: {
-        primary: '#8B5CF6',
-        light: '#F3F0FF',
-        text: '#6B46C1'
     },
     teal: {
         primary: '#14B8A6',

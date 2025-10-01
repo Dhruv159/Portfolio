@@ -52,13 +52,6 @@ export default function Loader({ onComplete, selectedColor }: LoaderProps) {
                 "oklch(0.55 0.16 140)",
                 "oklch(0.5 0.18 140)"
             ],
-            purple: [
-                "oklch(0.7 0.1 300)",
-                "oklch(0.65 0.12 300)",
-                "oklch(0.6 0.14 300)",
-                "oklch(0.55 0.16 300)",
-                "oklch(0.5 0.18 300)"
-            ],
             teal: [
                 "oklch(0.7 0.1 180)",
                 "oklch(0.65 0.12 180)",

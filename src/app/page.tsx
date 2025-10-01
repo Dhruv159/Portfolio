@@ -27,7 +27,7 @@ export default function Home() {
     const [activeProjectTab, setActiveProjectTab] = useState("personal")
 
     // Available colors for automatic theme switching
-    const availableColors = ["lavender", "blue", "green", "purple", "teal"]
+    const availableColors = ["lavender", "blue", "green", "teal"]
 
     // Load theme from localStorage on component mount
     useEffect(() => {
