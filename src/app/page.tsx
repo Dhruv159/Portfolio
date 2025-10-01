@@ -130,15 +130,16 @@ export default function Home() {
     return (
         <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-background mx-auto max-w-full">
             <header className="sticky top-0 z-10 w-full border-b border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 px-6">
-                <div className="container flex h-16 items-center justify-between">
+                <div className="container mx-auto flex h-16 items-center justify-between max-w-7xl">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
                             <span 
-                                className="font-bold text-xl bg-clip-text"
+                                className="font-bold text-xl"
                                 style={{ 
-                                    backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`,
+                                    background: `linear-gradient(90deg, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80, ${getPrimaryColor(selectedColor)}40)`,
                                     WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent'
+                                    WebkitTextFillColor: 'transparent',
+                                    backgroundClip: 'text'
                                 }}
                             >
                                 Dhruv Sharma
@@ -222,7 +223,7 @@ export default function Home() {
                 {/* Mobile Navigation Menu */}
                 {isMobileMenuOpen && (
                     <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
-                        <nav className="container py-4 flex flex-col gap-4">
+                        <nav className="container mx-auto py-4 flex flex-col gap-4 max-w-7xl">
                             <button 
                                 onClick={() => scrollToSection("about")}
                                 className={`text-sm font-medium transition-colors hover:text-primary ${
@@ -297,11 +298,11 @@ export default function Home() {
                                     <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                                         Hi, I&#39;m {''}
                                         <span 
-                                            className="bg-clip-text"
                                             style={{
-                                                backgroundImage: `linear-gradient(to right, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}60)`,
+                                                background: `linear-gradient(90deg, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80, ${getPrimaryColor(selectedColor)}40)`,
                                                 WebkitBackgroundClip: 'text',
-                                                WebkitTextFillColor: 'transparent'
+                                                WebkitTextFillColor: 'transparent',
+                                                backgroundClip: 'text'
                                             }}
                                         >
                                             Dhruv Sharma
