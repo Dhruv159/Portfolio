@@ -25,6 +25,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [selectedColor, setSelectedColor] = useState("lavender")
     const [activeProjectTab, setActiveProjectTab] = useState("personal")
+    const [activeSkillCategory, setActiveSkillCategory] = useState("automation")
 
     // Available colors for automatic theme switching
     const availableColors = ["lavender", "blue", "green", "teal"]
@@ -406,39 +407,101 @@ export default function Home() {
                                         <p className="text-xl font-semibold">Technical Skills</p>
                                     </div>
                                 
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    <SkillCategory
-                                        title="Automation & Testing"
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                    {/* Skill Category Navigation */}
+                                    <div className="flex flex-wrap gap-2 mb-8">
+                                        <button
+                                            onClick={() => setActiveSkillCategory("automation")}
+                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                                                activeSkillCategory === "automation" 
+                                                    ? "bg-primary text-white shadow-sm" 
+                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                                            }`}
+                                            style={{
+                                                backgroundColor: activeSkillCategory === "automation" ? getPrimaryColor(selectedColor) : undefined,
+                                                color: activeSkillCategory === "automation" ? "white" : undefined
+                                            }}
+                                        >
+                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                             </svg>
-                                        }
-                                        skills={["WebdriverIO", "Playwright", "Postman", "RestSharp", "JMeter", "Cucumber", "Page Object Model", "Azure DevOps", "CI/CD Pipelines"]}
-                                        selectedColor={selectedColor}
-                                    />
-                                    <SkillCategory
-                                        title="Frontend Development"
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            Automation & Testing
+                                        </button>
+                                        <button
+                                            onClick={() => setActiveSkillCategory("frontend")}
+                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                                                activeSkillCategory === "frontend" 
+                                                    ? "bg-primary text-white shadow-sm" 
+                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                                            }`}
+                                            style={{
+                                                backgroundColor: activeSkillCategory === "frontend" ? getPrimaryColor(selectedColor) : undefined,
+                                                color: activeSkillCategory === "frontend" ? "white" : undefined
+                                            }}
+                                        >
+                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                                             </svg>
-                                        }
-                                        skills={["Angular 2+", "TypeScript", "JavaScript", "HTML", "CSS"]}
-                                        selectedColor={selectedColor}
-                                    />
-                                    <SkillCategory
-                                        title="Tools & Platforms"
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            Frontend Development
+                                        </button>
+                                        <button
+                                            onClick={() => setActiveSkillCategory("tools")}
+                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                                                activeSkillCategory === "tools" 
+                                                    ? "bg-primary text-white shadow-sm" 
+                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                                            }`}
+                                            style={{
+                                                backgroundColor: activeSkillCategory === "tools" ? getPrimaryColor(selectedColor) : undefined,
+                                                color: activeSkillCategory === "tools" ? "white" : undefined
+                                            }}
+                                        >
+                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
                                             </svg>
-                                        }
-                                        skills={["Git", "GitHub", "VS Code", "Visual Studio", "SQL", "C#"]}
-                                        selectedColor={selectedColor}
-                                    />
+                                            Tools & Platforms
+                                        </button>
+                                    </div>
+
+                                    {/* Active Skill Category Content */}
+                                    <div className="space-y-6">
+                                        {activeSkillCategory === "automation" && (
+                                            <SkillCategory
+                                                title="Automation & Testing"
+                                                icon={
+                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                    </svg>
+                                                }
+                                                skills={["WebdriverIO", "Playwright", "Postman", "RestSharp", "JMeter", "Cucumber", "Page Object Model", "Azure DevOps", "CI/CD Pipelines"]}
+                                                selectedColor={selectedColor}
+                                            />
+                                        )}
+                                        {activeSkillCategory === "frontend" && (
+                                            <SkillCategory
+                                                title="Frontend Development"
+                                                icon={
+                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                    </svg>
+                                                }
+                                                skills={["Angular 2+", "TypeScript", "JavaScript", "HTML", "CSS"]}
+                                                selectedColor={selectedColor}
+                                            />
+                                        )}
+                                        {activeSkillCategory === "tools" && (
+                                            <SkillCategory
+                                                title="Tools & Platforms"
+                                                icon={
+                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                                                    </svg>
+                                                }
+                                                skills={["Git", "GitHub", "VS Code", "Visual Studio", "SQL", "C#"]}
+                                                selectedColor={selectedColor}
+                                            />
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -506,7 +569,7 @@ export default function Home() {
                                     technologies={["JavaScript", "Local Storage", "CSS3"]}
                                     link="#"
                                 />
-                                <PersonalProjectCard
+                                {/* <PersonalProjectCard
                                     category="Educational Game"
                                     title="Math Question Game"
                                     description="Educational game with multiple difficulty levels and progress tracking"
@@ -519,7 +582,7 @@ export default function Home() {
                                     description="Music streaming interface with responsive design and modern UI components"
                                     technologies={["JavaScript", "CSS3", "HTML5"]}
                                     link="#"
-                                />
+                                /> */}
                             </div>
                         )}
 
