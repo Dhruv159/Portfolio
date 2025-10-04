@@ -47,7 +47,7 @@ export default function Home() {
             localStorage.setItem('portfolio-theme', nextColor);
             return nextColor;
         });
-        }, 30 * 60 * 1000); // 30 minutes
+        }, 5 * 60 * 1000); // 5 minutes
     
         return () => clearInterval(interval);
     }, []);
@@ -127,6 +127,18 @@ export default function Home() {
         return <Loader onComplete={handleLoaderComplete} selectedColor={selectedColor} />
     }
 
+    function withAlpha(color: string, alpha: number): string {
+        const match = color.match(/^oklch\(([^)]+)\)$/);
+        if (!match) return color;
+      
+        const parts = match[1].trim().split(/\s+/);
+        if (parts.length === 3) {
+          return `oklch(${parts[0]} ${parts[1]} ${parts[2]} / ${alpha})`;
+        }
+      
+        return color;
+      }
+
     return (
         <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-background mx-auto max-w-full">
             <header className="sticky top-0 z-10 w-full border-b border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 px-6">
@@ -136,10 +148,10 @@ export default function Home() {
                             <span 
                                 className="font-bold text-xl"
                                 style={{ 
-                                    background: `linear-gradient(90deg, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80, ${getPrimaryColor(selectedColor)}40)`,
+                                    backgroundImage: `linear-gradient(90deg, ${withAlpha(getPrimaryColor(selectedColor), 1)}, ${withAlpha(getPrimaryColor(selectedColor), 0.80)}, ${withAlpha(getPrimaryColor(selectedColor), 0.60)})`,
+                                    backgroundClip: 'text',
                                     WebkitBackgroundClip: 'text',
                                     WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text'
                                 }}
                             >
                                 Dhruv Sharma
@@ -150,7 +162,7 @@ export default function Home() {
                         <nav className="hidden md:flex gap-10">
                             <button 
                                 onClick={() => scrollToSection("about")}
-                                className={`group relative text-sm font-medium transition-colors hover:text-primary ${
+                                className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("about") ? "text-primary" : "text-muted-foreground"
                                 }`}
                                 style={{
@@ -169,7 +181,7 @@ export default function Home() {
                             </button>
                             <button
                                 onClick={() => scrollToSection("projects")}
-                                className={`group relative text-sm font-medium transition-colors hover:text-primary ${
+                                className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("projects") ? "text-primary" : "text-muted-foreground"
                                 }`}
                                 style={{
@@ -188,7 +200,7 @@ export default function Home() {
                             </button>
                             <button 
                                 onClick={() => scrollToSection("contact")}
-                                className={`group relative text-sm font-medium transition-colors hover:text-primary ${
+                                className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
                                     isActive("contact") ? "text-primary" : "text-muted-foreground"
                                 }`}
                                 style={{
@@ -275,48 +287,21 @@ export default function Home() {
                     <div className="container px-4 md:px-6 mx-auto">
                         <div className="max-w-4xl mx-auto text-center">
                             <div className="flex flex-col justify-center space-y-6">
-                                {/* Logo SVG */}
-                                <div className="flex justify-center mb-4">
-                                    <div 
-                                        className="w-16 h-16 rounded-full flex items-center justify-center"
-                                        style={{
-                                            backgroundColor: getPrimaryLightColor(selectedColor)
-                                        }}
-                                    >
-                                        <svg 
-                                            className="w-8 h-8" 
-                                            fill="currentColor" 
-                                            viewBox="0 0 24 24"
-                                            style={{ color: getPrimaryColor(selectedColor) }}
-                                        >
-                                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                
                                 <div className="space-y-4">
-                                    <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                                        Hi, I&#39;m {''}
-                                        <span 
-                                            style={{
-                                                background: `linear-gradient(90deg, ${getPrimaryColor(selectedColor)}, ${getPrimaryColor(selectedColor)}80, ${getPrimaryColor(selectedColor)}40)`,
-                                                WebkitBackgroundClip: 'text',
-                                                WebkitTextFillColor: 'transparent',
-                                                backgroundClip: 'text'
-                                            }}
-                                        >
-                                            Dhruv Sharma
+                                    <div className="text-xl font-medium sm:text-4xl xl:text-5xl/none">
+                                        <span>
+                                            <p>Software Engineer | Product-Focused</p>
                                         </span>
-                                    </h1>
+                                    </div>
                                     <p className="max-w-[600px] mx-auto text-muted-foreground md:text-xl">
-                                        I&#39;m a developer focused on building efficient, user-friendly, and visually polished web applications.
+                                        Driving product excellence through thoughtful development, rigorous testing, and seamless software solutions.
                                     </p>
                                 </div>
                                 
                                 <div className="flex flex-col gap-2 min-[400px]:flex-row justify-center">
                                     <Button
                                         size="lg"
-                                        className="group relative overflow-hidden rounded-md px-6 py-3 transition-all duration-300 ease-out border-2"
+                                        className="group relative overflow-hidden rounded-md px-6 py-3 transition-all duration-300 ease-out border-2 cursor-pointer"
                                         style={{
                                             backgroundColor: 'transparent',
                                             borderColor: getPrimaryColor(selectedColor),
@@ -342,7 +327,7 @@ export default function Home() {
                                 <div className="flex gap-4 mt-6 justify-center">
                                     <Link
                                         href="https://github.com/Dhruv159"
-                                        className="rounded-full p-3 transition-all duration-300 hover:scale-110"
+                                        className="rounded-full p-3 transition-all duration-300 hover:scale-105"
                                         style={{
                                             backgroundColor: getPrimaryLightColor(selectedColor),
                                             color: getPrimaryColor(selectedColor)
@@ -353,7 +338,7 @@ export default function Home() {
                                     </Link>
                                     <Link
                                         href="https://www.linkedin.com/in/dhruv-sharma-635a1a209"
-                                        className="rounded-full p-3 transition-all duration-300 hover:scale-110"
+                                        className="rounded-full p-3 transition-all duration-300 hover:scale-105"
                                         style={{
                                             backgroundColor: getPrimaryLightColor(selectedColor),
                                             color: getPrimaryColor(selectedColor)
@@ -364,7 +349,7 @@ export default function Home() {
                                     </Link>
                                     <Link
                                         href="mailto:dhruvsarkhandia9@gmail.com"
-                                        className="rounded-full p-3 transition-all duration-300 hover:scale-110"
+                                        className="rounded-full p-3 transition-all duration-300 hover:scale-105"
                                         style={{
                                             backgroundColor: getPrimaryLightColor(selectedColor),
                                             color: getPrimaryColor(selectedColor)
@@ -391,112 +376,34 @@ export default function Home() {
                             >
                                 About Me
                             </span>
-                            <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Experience & Expertise</h2>
+                            <p className="text-2xl font-medium sm:text-3xl md:text-5xl">Experience & Expertise</p>
                         </div>
                         
                         <div className="mx-auto max-w-6xl mt-12">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                                {/* Left Column - Professional Journey */}
                                 <div className="space-y-6">
                                     <div className="flex items-center gap-3 mb-6">
-                                        <div 
-                                            className="h-10 w-10 rounded-full flex items-center justify-center"
-                                            style={{
-                                                backgroundColor: getPrimaryLightColor(selectedColor)
-                                            }}
-                                        >
-                                            <svg 
-                                                className="h-5 w-5" 
-                                                fill="currentColor" 
-                                                viewBox="0 0 20 20"
-                                                style={{ color: getPrimaryColor(selectedColor) }}
-                                            >
-                                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-semibold">Professional Journey</h3>
+                                        <p className="text-xl font-semibold">Professional Journey</p>
                                     </div>
                                     <div className="space-y-4">
                                         <p className="text-muted-foreground">
-                                            Automation Engineer at Keka Technologies with 3+ years of experience specializing in manual and automated testing across UI, API, and Performance domains.
+                                            As a Software Engineer at Keka Technologies with over 3 years of experience, I have been actively involved in designing, building, and enhancing core HRMS and billing solutions that serve a large and growing user base. My role has primarily focused on developing scalable applications, optimizing performance, and ensuring seamless integrations through APIs and automation.
                                         </p>
                                         <p className="text-muted-foreground">
-                                            Led QA lifecycle for three core modules, achieving <span className="font-semibold text-primary">70% reduction in production bugs</span> while maintaining less than <span className="font-semibold text-primary">1% bug escape rate</span> through comprehensive testing strategies.
+                                            I have contributed to end-to-end feature development — from requirement analysis and system design to deployment and support — ensuring that the solutions align with both business goals and user needs. By applying principles of clean architecture and best coding practices, I’ve delivered modules that are maintainable, extensible, and aligned with industry standards.
                                         </p>
                                         <p className="text-muted-foreground">
-                                            Passionate about building scalable automation tools that bridge technical complexity with user accessibility, enabling teams to deliver high-quality software efficiently.
+                                            In addition, I have worked on performance tuning initiatives, reducing load times and improving system responsiveness to handle high-volume transactions effectively. My efforts in automating recurring processes and streamlining integrations have significantly minimized manual intervention, boosting efficiency for both internal teams and end users.
+                                        </p>
+                                        <p className="text-muted-foreground">
+                                            Collaboration has been at the heart of my work, as I’ve closely partnered with cross-functional teams including product managers, QA, and DevOps to ensure timely, high-quality releases. This team-driven approach, combined with a focus on continuous learning and adopting modern technologies, has consistently resulted in reliable software that enhances user experience, increases adoption, and drives business value.
                                         </p>
                                     </div>
                                 </div>
 
-                                {/* Right Column - Key Metrics */}
-                                <div className="grid grid-cols-2 gap-4">
-                                    <MetricCard
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                            </svg>
-                                        }
-                                        value="70%"
-                                        title="Bug Reduction"
-                                        description="Reduced production bugs through comprehensive testing strategies"
-                                        selectedColor={selectedColor}
-                                    />
-                                    <MetricCard
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                            </svg>
-                                        }
-                                        value="60%"
-                                        title="QA Productivity"
-                                        description="Enhanced team productivity with AI-driven automation tools"
-                                        selectedColor={selectedColor}
-                                    />
-                                    <MetricCard
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                            </svg>
-                                        }
-                                        value="<1%"
-                                        title="Bug Escape Rate"
-                                        description="Maintained exceptional quality with comprehensive coverage"
-                                        selectedColor={selectedColor}
-                                    />
-                                    <MetricCard
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                                            </svg>
-                                        }
-                                        value="4+"
-                                        title="Team Leadership"
-                                        description="Led QA teams and mentored junior engineers"
-                                        selectedColor={selectedColor}
-                                    />
-                                </div>
-                            </div>
-
                                 {/* Technical Skills Section */}
-                                <div className="mt-16">
+                                <div className="mt-12">
                                     <div className="flex items-center gap-3 mb-8">
-                                        <div 
-                                            className="h-10 w-10 rounded-full flex items-center justify-center"
-                                            style={{
-                                                backgroundColor: getPrimaryLightColor(selectedColor)
-                                            }}
-                                        >
-                                            <svg 
-                                                className="h-5 w-5" 
-                                                fill="currentColor" 
-                                                viewBox="0 0 20 20"
-                                                style={{ color: getPrimaryColor(selectedColor) }}
-                                            >
-                                                <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-semibold">Technical Skills</h3>
+                                        <p className="text-xl font-semibold">Technical Skills</p>
                                     </div>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -537,7 +444,7 @@ export default function Home() {
                                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
                                         </svg>
                                         }
-                                        skills={["English", "Hindi", "Telugu", "Kannada"]}
+                                        skills={["English", "Hindi", "Punjabi"]}
                                         selectedColor={selectedColor}
                                     />
                                 </div>
@@ -557,7 +464,7 @@ export default function Home() {
                             >
                                 Projects
                             </span>
-                            <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">Featured Projects</h2>
+                            <h2 className="text-2xl font-medium sm:text-3xl md:text-5xl">Featured Projects</h2>
                             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                                 Check out some of my recent work.
                             </p>
@@ -692,7 +599,7 @@ export default function Home() {
                                 >
                                     Get in Touch
                                 </span>
-                                <h2 className="text-3xl font-bold leading-[1.1] sm:text-3xl md:text-5xl">
+                                <h2 className="text-2xl font-medium sm:text-3xl md:text-5xl">
                                     Let's Work Together
                                 </h2>
                             </div>
