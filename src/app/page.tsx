@@ -290,7 +290,7 @@ export default function Home() {
                                 <div className="space-y-4">
                                     <div className="text-xl font-medium sm:text-4xl xl:text-5xl/none">
                                         <span>
-                                            <p>Software Engineer | Product-Focused</p>
+                                            <p className="whitespace-nowrap">Software Engineer | Product-Focused</p>
                                         </span>
                                     </div>
                                     <p className="max-w-[600px] mx-auto text-muted-foreground md:text-xl">
@@ -475,28 +475,30 @@ export default function Home() {
                             <div className="inline-flex rounded-lg border border-border bg-muted p-1">
                                 <button
                                     onClick={() => setActiveProjectTab("personal")}
-                                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                                    className={`px-4 py-2 text-sm font-medium rounded-l-lg transition-all ${
                                         activeProjectTab === "personal" 
                                             ? "bg-background text-foreground shadow-sm" 
                                             : "text-muted-foreground hover:text-foreground"
                                     }`}
                                     style={{
                                         backgroundColor: activeProjectTab === "personal" ? getPrimaryColor(selectedColor) : undefined,
-                                        color: activeProjectTab === "personal" ? "white" : undefined
+                                        color: activeProjectTab === "personal" ? "white" : undefined,
+                                        borderColor: activeProjectTab === "personal" ? getPrimaryColor(selectedColor) : undefined
                                     }}
                                 >
                                     Personal Projects
                                 </button>
                                 <button
                                     onClick={() => setActiveProjectTab("company")}
-                                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all ${
+                                    className={`px-4 py-2 text-sm font-medium rounded-r-lg transition-all ${
                                         activeProjectTab === "company" 
                                             ? "bg-background text-foreground shadow-sm" 
                                             : "text-muted-foreground hover:text-foreground"
                                     }`}
-                                style={{
+                                    style={{
                                         backgroundColor: activeProjectTab === "company" ? getPrimaryColor(selectedColor) : undefined,
-                                        color: activeProjectTab === "company" ? "white" : undefined
+                                        color: activeProjectTab === "company" ? "white" : undefined,
+                                        borderColor: activeProjectTab === "company" ? getPrimaryColor(selectedColor) : undefined
                                     }}
                                 >
                                     Company Projects
@@ -554,7 +556,7 @@ export default function Home() {
 
                         {/* Company Projects */}
                         {activeProjectTab === "company" && (
-                            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+                            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8">
                                 <CompanyProjectCard
                                     title="Natural Language Driven Automation Tool"
                                     description="AI-powered tool using Playwright and Cursor that converts plain English test scenarios into executable code, enabling QAs to create tests with minimal programming knowledge."
@@ -695,7 +697,7 @@ export default function Home() {
             <footer className="w-full border-t py-8 bg-muted/30 dark:bg-muted/10">
                 <div className="container mx-auto flex flex-col items-center justify-center gap-4 md:flex-row md:gap-6">
                     <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-                        © 2025 Dhruv Sharma. All rights reserved.
+                        © {new Date().getFullYear()} Dhruv Sharma. All rights reserved.
                     </p>
                 </div>
             </footer>
@@ -830,15 +832,11 @@ function SkillCategory({ title, icon, skills, selectedColor }) {
                 </div>
                 <h4 className="font-semibold">{title}</h4>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-col gap-2">
                 {skills.map((skill, i) => (
                     <span
                         key={i}
-                        className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
-                        style={{
-                            backgroundColor: getPrimaryLightColor(selectedColor),
-                            color: getPrimaryColor(selectedColor)
-                        }}
+                        className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-muted text-muted-foreground"
                     >
                         {skill}
                     </span>

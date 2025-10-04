@@ -68,7 +68,15 @@ export default function Loader({ onComplete, selectedColor }: LoaderProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
             <div className="text-center space-y-3">
-                <h1 className="text-3xl font-bold text-foreground">Dhruv Sharma</h1>
+                <h1 
+                    className="text-3xl font-bold"
+                    style={{ 
+                        color: colorVariations[0],
+                        opacity: 0.8
+                    }}
+                >
+                    Dhruv Sharma
+                </h1>
                 <p className="text-muted-foreground">Loading portfolio</p>
                 {/* Animated Dots - matching the image provided */}
                 <div className="flex justify-center items-center space-x-3">
