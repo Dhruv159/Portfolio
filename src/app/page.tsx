@@ -377,7 +377,7 @@ export default function Home() {
                             >
                                 About Me
                             </span>
-                            <p className="text-2xl font-medium sm:text-3xl md:text-5xl">Experience & Expertise</p>
+                            <p className="text-xl font-medium sm:text-4xl xl:text-5xl/none">Experience & Expertise</p>
                         </div>
                         
                         <div className="mx-auto max-w-6xl mt-12">
@@ -517,7 +517,7 @@ export default function Home() {
                             >
                                 Projects
                             </span>
-                            <h2 className="text-2xl font-medium sm:text-3xl md:text-5xl">Featured Projects</h2>
+                            <h2 className="text-xl font-medium sm:text-4xl xl:text-5xl/none">Featured Projects</h2>
                             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                                 Check out some of my recent work.
                             </p>
@@ -646,7 +646,7 @@ export default function Home() {
                                 >
                                     Get in Touch
                                 </span>
-                                <h2 className="text-2xl font-medium sm:text-3xl md:text-5xl">
+                                <h2 className="text-xl font-medium sm:text-4xl xl:text-5xl/none">
                                     Let's Work Together
                                 </h2>
                             </div>
