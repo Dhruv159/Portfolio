@@ -537,6 +537,7 @@ export default function Home() {
                                         "Generate invoices automatically, handle taxes, and monitor payments in real time for smooth cash flow."
                                     ]}
                                     link="#"
+                                    selectedColor={selectedColor}
                                 />
                                 <CompanyProjectCard
                                     title="Client Support and Ticketing System"
@@ -549,6 +550,7 @@ export default function Home() {
                                         "Enhanced client experience through real-time communication and visibility."
                                     ]}
                                     link="#"
+                                    selectedColor={selectedColor}
                                 />
                                 <CompanyProjectCard
                                     title="Frontend Modernization & Migration"
@@ -561,6 +563,7 @@ export default function Home() {
                                         "Enhanced load times and improved overall user interaction experience."
                                     ]}
                                     link="#"
+                                    selectedColor={selectedColor}
                                 />
                         </div>
                         )}
@@ -686,7 +689,7 @@ export default function Home() {
 
 function PersonalProjectCard({ category, title, description, technologies, link }) {
     return (
-        <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md dark:bg-background/80">
+        <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 dark:shadow-primary/5 dark:hover:shadow-primary/20 hover:-translate-y-1 dark:bg-background/80">
             <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                     <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
@@ -705,7 +708,7 @@ function PersonalProjectCard({ category, title, description, technologies, link 
                             <span
                                 key={i}
                             className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-                            >
+                        >
                             {tech}
                             </span>
                         ))}
@@ -724,16 +727,26 @@ function PersonalProjectCard({ category, title, description, technologies, link 
     )
 }
 
-function CompanyProjectCard({ title, description, impact, benefits, link }) {
+function CompanyProjectCard({ title, description, impact, benefits, link, selectedColor }) {
     return (
-        <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md dark:bg-background/80">
+        <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 dark:shadow-primary/5 dark:hover:shadow-primary/20 hover:-translate-y-1 dark:bg-background/80">
             <div className="p-6">
                 <h3 className="text-xl font-bold mb-2 text-primary">{title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{description}</p>
                 <div className="bg-primary/5 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-3">
-                        <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center">
-                            <svg className="h-3 w-3 text-primary" fill="{selectedColor}" viewBox="0 0 20 20">
+                        <div 
+                            className="h-5 w-5 rounded-full flex items-center justify-center"
+                            style={{
+                                backgroundColor: getPrimaryLightColor(selectedColor)
+                            }}
+                        >
+                            <svg 
+                                className="h-3 w-3" 
+                                style={{ color: getPrimaryColor(selectedColor) }}
+                                fill="currentColor" 
+                                viewBox="0 0 20 20"
+                            >
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                         </div>
@@ -749,31 +762,6 @@ function CompanyProjectCard({ title, description, impact, benefits, link }) {
                     </ul>
                 </div>
             </div>
-        </div>
-    )
-}
-
-function MetricCard({ icon, value, title, description, selectedColor }) {
-    return (
-        <div className="group flex flex-col items-center gap-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/50 dark:bg-background/80">
-            <div 
-                className="flex h-12 w-12 items-center justify-center rounded-full group-hover:scale-110 transition-transform"
-                style={{
-                    backgroundColor: getPrimaryLightColor(selectedColor)
-                }}
-            >
-                <div style={{ color: getPrimaryColor(selectedColor) }}>
-                    {icon}
-                </div>
-            </div>
-            <div 
-                className="text-2xl font-bold"
-                style={{ color: getPrimaryColor(selectedColor) }}
-            >
-                {value}
-            </div>
-            <h3 className="text-lg font-semibold text-center">{title}</h3>
-            <p className="text-sm text-muted-foreground text-center">{description}</p>
         </div>
     )
 }
@@ -794,7 +782,7 @@ function SkillCategory({ title, icon, skills, selectedColor }) {
                 </div>
                 <h4 className="font-semibold">{title}</h4>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-wrap gap-2">
                 {skills.map((skill, i) => (
                     <span
                         key={i}
@@ -808,26 +796,4 @@ function SkillCategory({ title, icon, skills, selectedColor }) {
     )
 }
 
-function ContactCard({ icon, title, value, href }: ContactCardProps) {
-    return (
-        <div className="group flex flex-col items-center gap-2 rounded-lg border bg-background p-6 shadow-sm transition-all hover:shadow-md hover:border-primary/50 dark:bg-background/80">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary/20">
-                {icon}
-            </div>
-            <h3 className="text-lg font-semibold">{title}</h3>
-            {href ? (
-                <a
-                    href={href}
-                    className="text-sm text-muted-foreground hover:text-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {value}
-                </a>
-            ) : (
-                <p className="text-sm text-muted-foreground">{value}</p>
-            )}
-        </div>
-    )
-}
 
