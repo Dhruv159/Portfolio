@@ -437,16 +437,6 @@ export default function Home() {
                                         skills={["Git", "GitHub", "VS Code", "Visual Studio", "SQL", "C#"]}
                                         selectedColor={selectedColor}
                                     />
-                                    <SkillCategory
-                                        title="Languages"
-                                        icon={
-                                            <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
-                                        </svg>
-                                        }
-                                        skills={["English", "Hindi", "Punjabi"]}
-                                        selectedColor={selectedColor}
-                                    />
                                 </div>
                             </div>
                         </div>
@@ -475,7 +465,7 @@ export default function Home() {
                             <div className="inline-flex rounded-lg border border-border bg-muted p-1">
                                 <button
                                     onClick={() => setActiveProjectTab("personal")}
-                                    className={`px-4 py-2 text-sm font-medium rounded-l-lg transition-all ${
+                                    className={`cursor-pointer px-4 py-2 text-sm font-medium rounded-l-lg transition-all ${
                                         activeProjectTab === "personal" 
                                             ? "bg-background text-foreground shadow-sm" 
                                             : "text-muted-foreground hover:text-foreground"
@@ -490,7 +480,7 @@ export default function Home() {
                                 </button>
                                 <button
                                     onClick={() => setActiveProjectTab("company")}
-                                    className={`px-4 py-2 text-sm font-medium rounded-r-lg transition-all ${
+                                    className={`cursor-pointer px-4 py-2 text-sm font-medium rounded-r-lg transition-all ${
                                         activeProjectTab === "company" 
                                             ? "bg-background text-foreground shadow-sm" 
                                             : "text-muted-foreground hover:text-foreground"
@@ -509,27 +499,6 @@ export default function Home() {
                         {/* Personal Projects */}
                         {activeProjectTab === "personal" && (
                             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                <PersonalProjectCard
-                                    category="Algorithm Visualization"
-                                    title="Bubble Sort Visualizer"
-                                    description="Interactive algorithm visualization with step-by-step animation and educational controls"
-                                    technologies={["JavaScript", "HTML5", "CSS3", "Animation"]}
-                                    link="#"
-                                />
-                                <PersonalProjectCard
-                                    category="Interactive Game"
-                                    title="Pop Game"
-                                    description="Engaging bubble-popping game with score tracking and responsive design"
-                                    technologies={["JavaScript", "Canvas API", "CSS3"]}
-                                    link="#"
-                                />
-                                <PersonalProjectCard
-                                    category="Framework Demo"
-                                    title="Angular 19 Showcase"
-                                    description="Modern Angular application demonstrating latest features and best practices"
-                                    technologies={["Angular 19", "TypeScript", "RxJS"]}
-                                    link="#"
-                                />
                                 <PersonalProjectCard
                                     category="Productivity App"
                                     title="Todo Application"
@@ -558,28 +527,38 @@ export default function Home() {
                         {activeProjectTab === "company" && (
                             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8">
                                 <CompanyProjectCard
-                                    title="Natural Language Driven Automation Tool"
-                                    description="AI-powered tool using Playwright and Cursor that converts plain English test scenarios into executable code, enabling QAs to create tests with minimal programming knowledge."
-                                    technologies={["Playwright", "Cursor AI", "TypeScript", "Page Object Model"]}
-                                    impact="60% boost in QA productivity"
+                                    title="Pricing Plan & Subscription Management System"
+                                    description="Developed an intelligent billing and subscription engine that empowers businesses to design, automate, and optimize recurring revenue models. It simplifies every step of the subscription lifecycle—from plan creation to payment collection—while offering full flexibility to customize pricing, features, and billing cycles for different customer segments."
+                                    impact="Streamlined billing and increased revenue accuracy"
                                     benefits={[
-                                        "AI-driven test generation from natural language",
-                                        "Self-healing mechanism for dynamic locators",
-                                        "Reduced barrier for non-technical testers",
-                                        "Enhanced early-stage test coverage"
+                                        "Allow enterprise clients to personalize plans, add-on modules, and discounts based on negotiated terms.",
+                                        "Enable smooth activation, renewal, upgrades, and cancellations through fully automated workflows.",
+                                        "Identify failed payments, renewal lapses, and discrepancies early to reduce churn and recover potential losses.",
+                                        "Generate invoices automatically, handle taxes, and monitor payments in real time for smooth cash flow."
                                     ]}
                                     link="#"
                                 />
                                 <CompanyProjectCard
-                                    title="Component-Based WebdriverIO Tool"
-                                    description="Scalable automation framework with component-based architecture, designed for dynamic UI environments with frontend-aligned structure."
-                                    technologies={["WebdriverIO", "Page Object Model", "TypeScript", "Component Architecture"]}
-                                    impact="40% reduction in framework learning effort"
+                                    title="Client Support and Ticketing System"
+                                    description="Enhance an internal ticketing and request management platform to streamline client communication, bug tracking, and feature request handling. The system ensures transparency, faster resolution cycles, and better collaboration between clients and internal teams."
+                                    impact="30% reduction in client issue resolution time"
                                     benefits={[
-                                        "Reusable UI components for better alignment",
-                                        "Advanced locator strategy for unstable elements",
-                                        "Centralized element handling wrapper",
-                                        "Resilient to UI changes with smart waits"
+                                        "Centralized tracking for client bugs, dev tasks, and feature requests.",
+                                        "Automated status updates and workflow management.",
+                                        "Integrated client side chatbots for instant client support.",
+                                        "Enhanced client experience through real-time communication and visibility."
+                                    ]}
+                                    link="#"
+                                />
+                                <CompanyProjectCard
+                                    title="Frontend Modernization & Migration"
+                                    description="Migrated the legacy frontend codebase to the latest framework version, restructured the overall architecture for scalability and maintainability, ensured compatibility with all third-party integrations, and delivered a faster, more responsive user experience."
+                                    impact="60% improvement in performance and developer efficiency"
+                                    benefits={[
+                                        "Upgraded outdated components and optimized UI rendering.",
+                                        "Redesigned codebase structure for modularity and scalability.",
+                                        "Ensured seamless integration with third-party libraries and tools.",
+                                        "Enhanced load times and improved overall user interaction experience."
                                     ]}
                                     link="#"
                                 />
@@ -745,33 +724,16 @@ function PersonalProjectCard({ category, title, description, technologies, link 
     )
 }
 
-function CompanyProjectCard({ title, description, technologies, impact, benefits, link }) {
+function CompanyProjectCard({ title, description, impact, benefits, link }) {
     return (
         <div className="group relative overflow-hidden rounded-lg border bg-background shadow-sm transition-all hover:shadow-md dark:bg-background/80">
             <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                    <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center">
-                        <svg className="h-5 w-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                    </div>
-                </div>
                 <h3 className="text-xl font-bold mb-2 text-primary">{title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {technologies.map((tech, i) => (
-                        <span
-                            key={i}
-                            className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                </div>
                 <div className="bg-primary/5 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-3">
                         <div className="h-5 w-5 rounded-full bg-primary/10 flex items-center justify-center">
-                            <svg className="h-3 w-3 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="h-3 w-3 text-primary" fill="{selectedColor}" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                         </div>
@@ -780,7 +742,7 @@ function CompanyProjectCard({ title, description, technologies, impact, benefits
                     <ul className="space-y-1">
                         {benefits.map((benefit, i) => (
                             <li key={i} className="text-sm text-primary flex items-start gap-2">
-                                <span className="text-primary mt-1">•</span>
+                                <span className="text-primary">•</span>
                                 <span>{benefit}</span>
                             </li>
                         ))}
