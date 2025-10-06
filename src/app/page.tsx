@@ -377,7 +377,7 @@ export default function Home() {
                             >
                                 About Me
                             </span>
-                            <p className="text-2xl font-medium sm:text-3xl md:text-5xl">Experience & Expertise</p>
+                            <p className="text-xl font-medium sm:text-4xl xl:text-5xl/none">Experience & Expertise</p>
                         </div>
                         
                         <div className="mx-auto max-w-6xl mt-12">
@@ -578,7 +578,7 @@ export default function Home() {
                             >
                                 Projects
                             </span>
-                            <h2 className="text-2xl font-medium sm:text-3xl md:text-5xl">Featured Projects</h2>
+                            <h2 className="text-xl font-medium sm:text-4xl xl:text-5xl/none">Featured Projects</h2>
                             <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
                                 Check out some of my recent work.
                             </p>
@@ -625,9 +625,9 @@ export default function Home() {
                             <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                                 <PersonalProjectCard
                                     category="Productivity App"
-                                    title="Todo Application"
-                                    description="Feature-rich task management application with local storage and intuitive interface"
-                                    technologies={["JavaScript", "TypeScript", "HTML5", "CSS3"]}
+                                    title="Awesome quiz app"
+                                    description="A dynamic and engaging quiz platform built to deliver personalized assessments with real-time scoring and analytics."
+                                    technologies={["JavaScript", "HTML5", "CSS3"]}
                                     link="#"
                                 />
                                 {/* <PersonalProjectCard
@@ -700,7 +700,7 @@ export default function Home() {
                                 >
                                     Get in Touch
                                 </span>
-                                <h2 className="text-2xl font-medium sm:text-3xl md:text-5xl">
+                                <h2 className="text-xl font-medium sm:text-4xl xl:text-5xl/none">
                                     Let's Work Together
                                 </h2>
                             </div>
@@ -812,11 +812,11 @@ function PersonalProjectCard({ category, title, description, technologies, link 
                     <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
                         {category}
                     </span>
-                    <div className="h-5 w-5 rounded border border-muted-foreground/20 flex items-center justify-center">
+                    {/* <div className="h-5 w-5 rounded border border-muted-foreground/20 flex items-center justify-center">
                         <svg className="h-3 w-3 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                    </div>
+                    </div> */}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{description}</p>
@@ -830,7 +830,7 @@ function PersonalProjectCard({ category, title, description, technologies, link 
                             </span>
                         ))}
                 </div>
-                <div className="mt-4">
+                {/* <div className="mt-4">
                     <Link
                         href={link}
                         className="inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary/80"
@@ -838,7 +838,7 @@ function PersonalProjectCard({ category, title, description, technologies, link 
                         View Demo
                         <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
-                </div>
+                </div> */}
             </div>
         </div>
     )
