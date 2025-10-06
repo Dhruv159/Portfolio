@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 // Email configuration from environment variables
 const EMAIL_FROM = process.env.EMAIL_FROM || 'Portfolio Contact <noreply@resend.dev>'
-const EMAIL_TO = process.env.EMAIL_TO || 'dhruvsarkhandia9@gmail.com'
+const EMAIL_TO = process.env.EMAIL_TO
 
 export interface EmailData {
     name: string
@@ -13,7 +13,7 @@ export interface EmailData {
     message: string
 }
 
-// Beautiful HTML email template
+// HTML email template
 export function createEmailTemplate(data: EmailData): string {
     return `
         <!DOCTYPE html>

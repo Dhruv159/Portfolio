@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getPrimaryColor } from "@/lib/color-utils"
 
 interface LoaderProps {
     onComplete: () => void
