@@ -464,40 +464,101 @@ export default function Home() {
 
                                     {/* Active Skill Category Content */}
                                     <div className="space-y-6">
-                                        {activeSkillCategory === "automation" && (
-                                            <SkillCategory
-                                                title="Automation & Testing"
-                                                icon={
-                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                                    </svg>
-                                                }
-                                                skills={["WebdriverIO", "Playwright", "Postman", "RestSharp", "JMeter", "Cucumber", "Page Object Model", "Azure DevOps", "CI/CD Pipelines"]}
-                                                selectedColor={selectedColor}
-                                            />
-                                        )}
                                         {activeSkillCategory === "frontend" && (
                                             <SkillCategory
-                                                title="Frontend Development"
-                                                icon={
-                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                    </svg>
-                                                }
-                                                skills={["Angular 2+", "TypeScript", "JavaScript", "HTML", "CSS"]}
-                                                selectedColor={selectedColor}
+                                            title="Frontend Development"
+                                            icon={
+                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                                    clipRule="evenodd"
+                                                />
+                                                </svg>
+                                            }
+                                            skills={["React", "Angular 2+", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Material UI", "Bootstrap"]}
+                                            selectedColor={selectedColor}
                                             />
                                         )}
+
+                                        {activeSkillCategory === "backend" && (
+                                            <SkillCategory
+                                            title="Backend Development"
+                                            icon={
+                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M10 2a8 8 0 00-8 8v4a4 4 0 004 4h8a4 4 0 004-4v-4a8 8 0 00-8-8zm1 14H9v-2h2v2zm0-4H9V6h2v6z"
+                                                    clipRule="evenodd"
+                                                />
+                                                </svg>
+                                            }
+                                            skills={["Node.js", "Express.js", ".NET Core", "RESTful APIs", "GraphQL", "JWT Authentication"]}
+                                            selectedColor={selectedColor}
+                                            />
+                                        )}
+
+                                        {activeSkillCategory === "database" && (
+                                            <SkillCategory
+                                            title="Database"
+                                            icon={
+                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M4 5c0-1.105 2.686-2 6-2s6 .895 6 2v10c0 1.105-2.686 2-6 2s-6-.895-6-2V5zm6 6c3.314 0 6-.448 6-1V8c0 .552-2.686 1-6 1s-6-.448-6-1v2c0 .552 2.686 1 6 1z"
+                                                    clipRule="evenodd"
+                                                />
+                                                </svg>
+                                            }
+                                            skills={["SQL Server", "PostgreSQL", "MySQL"]}
+                                            selectedColor={selectedColor}
+                                            />
+                                        )}
+
+                                        {activeSkillCategory === "languages" && (
+                                            <SkillCategory
+                                            title="Programming Languages"
+                                            icon={
+                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v5a2 2 0 01-2 2h-5l-3 3v-3H4a2 2 0 01-2-2V5z" />
+                                                </svg>
+                                            }
+                                            skills={["JavaScript", "TypeScript", "C#"]}
+                                            selectedColor={selectedColor}
+                                            />
+                                        )}
+
                                         {activeSkillCategory === "tools" && (
                                             <SkillCategory
-                                                title="Tools & Platforms"
-                                                icon={
-                                                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                                                    </svg>
-                                                }
-                                                skills={["Git", "GitHub", "VS Code", "Visual Studio", "SQL", "C#"]}
-                                                selectedColor={selectedColor}
+                                            title="Tools & Monitoring"
+                                            icon={
+                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                                    clipRule="evenodd"
+                                                />
+                                                </svg>
+                                            }
+                                            skills={["Git", "GitHub", "VS Code", "Visual Studio", "Postman", "Grafana", "Azure Portal"]}
+                                            selectedColor={selectedColor}
+                                            />
+                                        )}
+
+                                        {activeSkillCategory === "cloud" && (
+                                            <SkillCategory
+                                            title="Cloud & DevOps Services"
+                                            icon={
+                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M3 10a7 7 0 0114 0 3 3 0 010 6H6a3 3 0 01-3-3v-3z"
+                                                    clipRule="evenodd"
+                                                />
+                                                </svg>
+                                            }
+                                            skills={["Microsoft Azure", "Azure DevOps", "CI/CD Pipelines", "Docker", "Kubernetes", "AWS (Basic)"]}
+                                            selectedColor={selectedColor}
                                             />
                                         )}
                                     </div>
@@ -566,21 +627,14 @@ export default function Home() {
                                     category="Productivity App"
                                     title="Todo Application"
                                     description="Feature-rich task management application with local storage and intuitive interface"
-                                    technologies={["JavaScript", "Local Storage", "CSS3"]}
+                                    technologies={["JavaScript", "TypeScript", "HTML5", "CSS3"]}
                                     link="#"
                                 />
                                 {/* <PersonalProjectCard
-                                    category="Educational Game"
+                                    category="QueryEcho"
                                     title="Math Question Game"
                                     description="Educational game with multiple difficulty levels and progress tracking"
-                                    technologies={["JavaScript", "HTML5", "CSS3"]}
-                                    link="#"
-                                />
-                                <PersonalProjectCard
-                                    category="UI Clone"
-                                    title="Spotify Clone"
-                                    description="Music streaming interface with responsive design and modern UI components"
-                                    technologies={["JavaScript", "CSS3", "HTML5"]}
+                                    technologies={["React", "TypeScript", "HTML5", "CSS3"]}
                                     link="#"
                                 /> */}
                             </div>
