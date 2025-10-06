@@ -32,13 +32,6 @@ const colorOptions = [
         primaryHover: "oklch(0.6 0.2 140 / 0.2)"
     },
     {
-        name: "Purple",
-        value: "purple",
-        primary: "oklch(0.5 0.25 300)",
-        primaryLight: "oklch(0.5 0.25 300 / 0.1)",
-        primaryHover: "oklch(0.5 0.25 300 / 0.2)"
-    },
-    {
         name: "Teal",
         value: "teal",
         primary: "oklch(0.6 0.15 180)",
