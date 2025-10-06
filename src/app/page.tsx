@@ -16,7 +16,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [selectedColor, setSelectedColor] = useState("lavender")
     const [activeProjectTab, setActiveProjectTab] = useState("personal")
-    const [activeSkillCategory, setActiveSkillCategory] = useState("automation")
+    const [activeSkillCategory, setActiveSkillCategory] = useState("frontend")
 
     // Available colors for automatic theme switching
     const availableColors = ["lavender", "blue", "green", "teal"]
