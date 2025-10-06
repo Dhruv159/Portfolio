@@ -19,6 +19,7 @@ type ContactCardProps = {
     href?: string
 }
 
+
 export default function Home() {
     const [activeSection, setActiveSection] = useState("")
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -51,7 +52,7 @@ export default function Home() {
         }, 5 * 60 * 1000); // 5 minutes
     
         return () => clearInterval(interval);
-    }, []);
+    }, [availableColors]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -381,188 +382,222 @@ export default function Home() {
                         </div>
                         
                         <div className="mx-auto max-w-6xl mt-12">
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <p className="text-xl font-semibold">Professional Journey</p>
+                                </div>
+                                <div className="space-y-4">
+                                    <p className="text-muted-foreground">
+                                        As a Software Engineer at Keka Technologies with over 3 years of experience, I have been actively involved in designing, building, and enhancing core HRMS and billing solutions that serve a large and growing user base. My role has primarily focused on developing scalable applications, optimizing performance, and ensuring seamless integrations through APIs and automation.
+                                    </p>
+                                    <p className="text-muted-foreground">
+                                        I have contributed to end-to-end feature development — from requirement analysis and system design to deployment and support — ensuring that the solutions align with both business goals and user needs. By applying principles of clean architecture and best coding practices, I’ve delivered modules that are maintainable, extensible, and aligned with industry standards.
+                                    </p>
+                                    <p className="text-muted-foreground">
+                                        In addition, I have worked on performance tuning initiatives, reducing load times and improving system responsiveness to handle high-volume transactions effectively. My efforts in automating recurring processes and streamlining integrations have significantly minimized manual intervention, boosting efficiency for both internal teams and end users.
+                                    </p>
+                                    <p className="text-muted-foreground">
+                                        Collaboration has been at the heart of my work, as I’ve closely partnered with cross-functional teams including product managers, QA, and DevOps to ensure timely, high-quality releases. This team-driven approach, combined with a focus on continuous learning and adopting modern technologies, has consistently resulted in reliable software that enhances user experience, increases adoption, and drives business value.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Technical Skills Section */}
+                            <div className="mt-12">
+                                <div className="flex items-center gap-3 mb-8">
+                                    <p className="text-xl font-semibold">Technical Skills</p>
+                                </div>
+
+                                {/* Skill Category Navigation */}
+                                <div className="flex flex-wrap gap-2 mb-8">
+                                    {[
+                                    { id: "frontend", label: "Frontend" },
+                                    { id: "backend", label: "Backend" },
+                                    { id: "database", label: "Database" },
+                                    { id: "languages", label: "Languages" },
+                                    { id: "tools", label: "Tools & Monitoring" },
+                                    { id: "cloud", label: "Cloud & DevOps" },
+                                    // { id: "automation", label: "Automation & Testing" },
+                                    ].map((tab) => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveSkillCategory(tab.id)}
+                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                                        activeSkillCategory === tab.id
+                                            ? "bg-primary text-white shadow-sm"
+                                            : "bg-muted text-muted-foreground hover:bg-muted/80"
+                                        }`}
+                                        style={{
+                                        backgroundColor:
+                                            activeSkillCategory === tab.id
+                                            ? getPrimaryColor(selectedColor)
+                                            : undefined,
+                                        color: activeSkillCategory === tab.id ? "white" : undefined,
+                                        }}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                    ))}
+                                </div>
+
+                                {/* Active Skill Category Content */}
                                 <div className="space-y-6">
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <p className="text-xl font-semibold">Professional Journey</p>
-                                    </div>
-                                    <div className="space-y-4">
-                                        <p className="text-muted-foreground">
-                                            As a Software Engineer at Keka Technologies with over 3 years of experience, I have been actively involved in designing, building, and enhancing core HRMS and billing solutions that serve a large and growing user base. My role has primarily focused on developing scalable applications, optimizing performance, and ensuring seamless integrations through APIs and automation.
-                                        </p>
-                                        <p className="text-muted-foreground">
-                                            I have contributed to end-to-end feature development — from requirement analysis and system design to deployment and support — ensuring that the solutions align with both business goals and user needs. By applying principles of clean architecture and best coding practices, I’ve delivered modules that are maintainable, extensible, and aligned with industry standards.
-                                        </p>
-                                        <p className="text-muted-foreground">
-                                            In addition, I have worked on performance tuning initiatives, reducing load times and improving system responsiveness to handle high-volume transactions effectively. My efforts in automating recurring processes and streamlining integrations have significantly minimized manual intervention, boosting efficiency for both internal teams and end users.
-                                        </p>
-                                        <p className="text-muted-foreground">
-                                            Collaboration has been at the heart of my work, as I’ve closely partnered with cross-functional teams including product managers, QA, and DevOps to ensure timely, high-quality releases. This team-driven approach, combined with a focus on continuous learning and adopting modern technologies, has consistently resulted in reliable software that enhances user experience, increases adoption, and drives business value.
-                                        </p>
-                                    </div>
+                                    {activeSkillCategory === "frontend" && (
+                                    <SkillCategory
+                                        title="Frontend Development"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                            fillRule="evenodd"
+                                            d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        }
+                                        skills={[
+                                        "React",
+                                        "Angular 2+",
+                                        "Next.js",
+                                        "HTML5",
+                                        "CSS3",
+                                        "Tailwind CSS",
+                                        "Material UI",
+                                        "Bootstrap",
+                                        ]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )}
+
+                                    {activeSkillCategory === "backend" && (
+                                    <SkillCategory
+                                        title="Backend Development"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                            fillRule="evenodd"
+                                            d="M10 2a8 8 0 00-8 8v4a4 4 0 004 4h8a4 4 0 004-4v-4a8 8 0 00-8-8zm1 14H9v-2h2v2zm0-4H9V6h2v6z"
+                                            clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        }
+                                        skills={[
+                                        "Node.js",
+                                        "Express.js",
+                                        ".NET Core",
+                                        "RESTful APIs",
+                                        "GraphQL",
+                                        "JWT Authentication",
+                                        ]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )}
+
+                                    {activeSkillCategory === "database" && (
+                                    <SkillCategory
+                                        title="Database"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                            fillRule="evenodd"
+                                            d="M4 5c0-1.105 2.686-2 6-2s6 .895 6 2v10c0 1.105-2.686 2-6 2s-6-.895-6-2V5zm6 6c3.314 0 6-.448 6-1V8c0 .552-2.686 1-6 1s-6-.448-6-1v2c0 .552 2.686 1 6 1z"
+                                            clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        }
+                                        skills={["SQL Server", "PostgreSQL", "MySQL"]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )}
+
+                                    {activeSkillCategory === "languages" && (
+                                    <SkillCategory
+                                        title="Programming Languages"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v5a2 2 0 01-2 2h-5l-3 3v-3H4a2 2 0 01-2-2V5z" />
+                                        </svg>
+                                        }
+                                        skills={["JavaScript", "TypeScript", "C#"]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )}
+
+                                    {activeSkillCategory === "tools" && (
+                                    <SkillCategory
+                                        title="Tools & Monitoring"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                            fillRule="evenodd"
+                                            d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                                            clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        }
+                                        skills={[
+                                        "Git",
+                                        "GitHub",
+                                        "VS Code",
+                                        "Visual Studio",
+                                        "Postman",
+                                        "Grafana",
+                                        "Azure Portal",
+                                        ]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )}
+
+                                    {activeSkillCategory === "cloud" && (
+                                    <SkillCategory
+                                        title="Cloud & DevOps Services"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                            fillRule="evenodd"
+                                            d="M3 10a7 7 0 0114 0 3 3 0 010 6H6a3 3 0 01-3-3v-3z"
+                                            clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        }
+                                        skills={[
+                                        "Microsoft Azure",
+                                        "Azure DevOps",
+                                        "CI/CD Pipelines",
+                                        "Docker",
+                                        "Kubernetes",
+                                        "AWS (Basic)",
+                                        ]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )}
+
+                                    {/* {activeSkillCategory === "automation" && (
+                                    <SkillCategory
+                                        title="Automation & Testing"
+                                        icon={
+                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                            fillRule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                            clipRule="evenodd"
+                                            />
+                                        </svg>
+                                        }
+                                        skills={[
+                                        "WebdriverIO",
+                                        "Playwright",
+                                        "Postman",
+                                        "JMeter",
+                                        "Cucumber",
+                                        "Page Object Model",
+                                        "Azure DevOps",
+                                        "CI/CD Pipelines",
+                                        ]}
+                                        selectedColor={selectedColor}
+                                    />
+                                    )} */}
                                 </div>
-
-                                {/* Technical Skills Section */}
-                                <div className="mt-12">
-                                    <div className="flex items-center gap-3 mb-8">
-                                        <p className="text-xl font-semibold">Technical Skills</p>
-                                    </div>
-                                
-                                    {/* Skill Category Navigation */}
-                                    <div className="flex flex-wrap gap-2 mb-8">
-                                        <button
-                                            onClick={() => setActiveSkillCategory("automation")}
-                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                                                activeSkillCategory === "automation" 
-                                                    ? "bg-primary text-white shadow-sm" 
-                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                                            }`}
-                                            style={{
-                                                backgroundColor: activeSkillCategory === "automation" ? getPrimaryColor(selectedColor) : undefined,
-                                                color: activeSkillCategory === "automation" ? "white" : undefined
-                                            }}
-                                        >
-                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                            </svg>
-                                            Automation & Testing
-                                        </button>
-                                        <button
-                                            onClick={() => setActiveSkillCategory("frontend")}
-                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                                                activeSkillCategory === "frontend" 
-                                                    ? "bg-primary text-white shadow-sm" 
-                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                                            }`}
-                                            style={{
-                                                backgroundColor: activeSkillCategory === "frontend" ? getPrimaryColor(selectedColor) : undefined,
-                                                color: activeSkillCategory === "frontend" ? "white" : undefined
-                                            }}
-                                        >
-                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                            </svg>
-                                            Frontend Development
-                                        </button>
-                                        <button
-                                            onClick={() => setActiveSkillCategory("tools")}
-                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                                                activeSkillCategory === "tools" 
-                                                    ? "bg-primary text-white shadow-sm" 
-                                                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                                            }`}
-                                            style={{
-                                                backgroundColor: activeSkillCategory === "tools" ? getPrimaryColor(selectedColor) : undefined,
-                                                color: activeSkillCategory === "tools" ? "white" : undefined
-                                            }}
-                                        >
-                                            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
-                                            </svg>
-                                            Tools & Platforms
-                                        </button>
-                                    </div>
-
-                                    {/* Active Skill Category Content */}
-                                    <div className="space-y-6">
-                                        {activeSkillCategory === "frontend" && (
-                                            <SkillCategory
-                                            title="Frontend Development"
-                                            icon={
-                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                                                    clipRule="evenodd"
-                                                />
-                                                </svg>
-                                            }
-                                            skills={["React", "Angular 2+", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "Material UI", "Bootstrap"]}
-                                            selectedColor={selectedColor}
-                                            />
-                                        )}
-
-                                        {activeSkillCategory === "backend" && (
-                                            <SkillCategory
-                                            title="Backend Development"
-                                            icon={
-                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 2a8 8 0 00-8 8v4a4 4 0 004 4h8a4 4 0 004-4v-4a8 8 0 00-8-8zm1 14H9v-2h2v2zm0-4H9V6h2v6z"
-                                                    clipRule="evenodd"
-                                                />
-                                                </svg>
-                                            }
-                                            skills={["Node.js", "Express.js", ".NET Core", "RESTful APIs", "GraphQL", "JWT Authentication"]}
-                                            selectedColor={selectedColor}
-                                            />
-                                        )}
-
-                                        {activeSkillCategory === "database" && (
-                                            <SkillCategory
-                                            title="Database"
-                                            icon={
-                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M4 5c0-1.105 2.686-2 6-2s6 .895 6 2v10c0 1.105-2.686 2-6 2s-6-.895-6-2V5zm6 6c3.314 0 6-.448 6-1V8c0 .552-2.686 1-6 1s-6-.448-6-1v2c0 .552 2.686 1 6 1z"
-                                                    clipRule="evenodd"
-                                                />
-                                                </svg>
-                                            }
-                                            skills={["SQL Server", "PostgreSQL", "MySQL"]}
-                                            selectedColor={selectedColor}
-                                            />
-                                        )}
-
-                                        {activeSkillCategory === "languages" && (
-                                            <SkillCategory
-                                            title="Programming Languages"
-                                            icon={
-                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v5a2 2 0 01-2 2h-5l-3 3v-3H4a2 2 0 01-2-2V5z" />
-                                                </svg>
-                                            }
-                                            skills={["JavaScript", "TypeScript", "C#"]}
-                                            selectedColor={selectedColor}
-                                            />
-                                        )}
-
-                                        {activeSkillCategory === "tools" && (
-                                            <SkillCategory
-                                            title="Tools & Monitoring"
-                                            icon={
-                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
-                                                    clipRule="evenodd"
-                                                />
-                                                </svg>
-                                            }
-                                            skills={["Git", "GitHub", "VS Code", "Visual Studio", "Postman", "Grafana", "Azure Portal"]}
-                                            selectedColor={selectedColor}
-                                            />
-                                        )}
-
-                                        {activeSkillCategory === "cloud" && (
-                                            <SkillCategory
-                                            title="Cloud & DevOps Services"
-                                            icon={
-                                                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M3 10a7 7 0 0114 0 3 3 0 010 6H6a3 3 0 01-3-3v-3z"
-                                                    clipRule="evenodd"
-                                                />
-                                                </svg>
-                                            }
-                                            skills={["Microsoft Azure", "Azure DevOps", "CI/CD Pipelines", "Docker", "Kubernetes", "AWS (Basic)"]}
-                                            selectedColor={selectedColor}
-                                            />
-                                        )}
-                                    </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
