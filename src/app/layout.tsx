@@ -19,16 +19,16 @@ children: React.ReactNode
 }) {
 return (
 <html lang="en" suppressHydrationWarning>
-              <head>
-                  <meta name="color-scheme" content="light dark" />
-                  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-              </head>
-              <body className={inter.className}>
-                  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-                      {children}<Toaster/>
-                  </ThemeProvider>
-                  <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" async/>
-              </body>
-          </html>
-      )
+    <head>
+        <meta name="color-scheme" content="light dark" />
+        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+    </head>
+    <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+            {children}<Toaster/>
+        </ThemeProvider>
+        <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" async/>
+    </body>
+</html>
+    )
 }

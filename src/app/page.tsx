@@ -1,24 +1,14 @@
 "use client"
 import Link from "next/link"
-import Image from 'next/image'
-import { ArrowRight, Github, Linkedin, Mail, Menu, X, Calendar } from "lucide-react"
 import { useEffect, useState } from "react"
+import { ArrowRight, Github, Linkedin, Mail, Menu, X, Calendar } from "lucide-react"
 
+import Loader from "@/components/loader"
+import IconBadge from "@/components/icon-badge"
 import { Button } from "@/components/ui/button"
 import ContactForm from "@/components/contact-form"
-import Loader from "@/components/loader"
-import ColorPreference from "@/components/color-preference"
-import IconBadge from "@/components/icon-badge"
-import { getPrimaryColor, getPrimaryLightColor, getGradientClass, getCalendlyColors } from "@/lib/color-utils"
 import { ThemeToggle } from "@/components/theme-toggle"
-
-type ContactCardProps = {
-    icon: React.ReactNode
-    title: string
-    value: string
-    href?: string
-}
-
+import { getPrimaryColor, getPrimaryLightColor, getCalendlyColors } from "@/lib/color-utils"
 
 export default function Home() {
     const [activeSection, setActiveSection] = useState("")
@@ -26,7 +16,7 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [selectedColor, setSelectedColor] = useState("lavender")
     const [activeProjectTab, setActiveProjectTab] = useState("personal")
-    const [activeSkillCategory, setActiveSkillCategory] = useState("automation")
+    const [activeSkillCategory, setActiveSkillCategory] = useState("frontend")
 
     // Available colors for automatic theme switching
     const availableColors = ["lavender", "blue", "green", "teal"]
@@ -39,7 +29,7 @@ export default function Home() {
         }
     }, [])
 
-    // Automatic theme switching every 30 minutes
+    // Automatic theme switching every 5 minutes
     useEffect(() => {
         const interval = setInterval(() => {
         setSelectedColor(prevColor => {
@@ -77,30 +67,25 @@ export default function Home() {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    const isActive = (section: string) => activeSection === section
+    const isActive = (section: string) => activeSection === section;
 
     const scrollToSection = (sectionId: string) => {
-        const element = document.getElementById(sectionId)
+        const element = document.getElementById(sectionId);
         if (element) {
             element.scrollIntoView({ 
                 behavior: 'smooth',
                 block: 'start'
             })
         }
-        setIsMobileMenuOpen(false)
+        setIsMobileMenuOpen(false);
     }
 
     const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen)
+        setIsMobileMenuOpen(!isMobileMenuOpen);
     }
 
     const handleLoaderComplete = () => {
-        setIsLoading(false)
-    }
-
-    const handleColorChange = (color: string) => {
-        setSelectedColor(color)
-        localStorage.setItem('portfolio-theme', color)
+        setIsLoading(false);
     }
 
     const handleCalendlyClick = (e: React.MouseEvent) => {
@@ -137,9 +122,8 @@ export default function Home() {
         if (parts.length === 3) {
           return `oklch(${parts[0]} ${parts[1]} ${parts[2]} / ${alpha})`;
         }
-      
         return color;
-      }
+    }
 
     return (
         <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-background mx-auto max-w-full">
@@ -147,88 +131,54 @@ export default function Home() {
                 <div className="container mx-auto flex h-16 items-center justify-between max-w-7xl">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
-                            <span 
-                                className="font-bold text-xl"
-                                style={{ 
-                                    backgroundImage: `linear-gradient(90deg, ${withAlpha(getPrimaryColor(selectedColor), 1)}, ${withAlpha(getPrimaryColor(selectedColor), 0.80)}, ${withAlpha(getPrimaryColor(selectedColor), 0.60)})`,
-                                    backgroundClip: 'text',
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                }}
-                            >
+                            <span className="font-bold text-xl" 
+                                  style={{ 
+                                  backgroundImage: `linear-gradient(90deg, ${withAlpha(getPrimaryColor(selectedColor), 1)}, ${withAlpha(getPrimaryColor(selectedColor), 0.80)}, ${withAlpha(getPrimaryColor(selectedColor), 0.60)})`,
+                                  backgroundClip: 'text',
+                                  WebkitBackgroundClip: 'text',
+                                  WebkitTextFillColor: 'transparent',
+                                }}>
                                 Dhruv Sharma
                             </span>
                         </Link>
                     </div>
                     <div className="flex items-center gap-8">
                         <nav className="hidden md:flex gap-10">
-                            <button 
-                                onClick={() => scrollToSection("about")}
-                                className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("about") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("about") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                About
-                                <span 
-                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
-                                        isActive("about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                    }`}
-                                    style={{
-                                        backgroundColor: getPrimaryColor(selectedColor)
-                                    }}
-                                ></span>
+                            <button onClick={() => scrollToSection("about")} 
+                                    className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("about") ? "text-primary" : "text-muted-foreground"}`}
+                                    style={{ color: isActive("about") ? getPrimaryColor(selectedColor) : undefined}}>
+                                    About
+                                    <span className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform 
+                                        ${isActive("about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                                        style={{ backgroundColor: getPrimaryColor(selectedColor)}}>
+                                    </span>
                             </button>
-                            <button
-                                onClick={() => scrollToSection("projects")}
-                                className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("projects") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                Projects
-                                <span 
-                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
-                                        isActive("projects") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                    }`}
-                                    style={{
-                                        backgroundColor: getPrimaryColor(selectedColor)
-                                    }}
-                                ></span>
+                            <button onClick={() => scrollToSection("projects")}
+                                    className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary 
+                                    ${isActive("projects") ? "text-primary" : "text-muted-foreground"}`}
+                                    style={{ color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined}}>
+                                    Projects
+                                    <span className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform 
+                                        ${isActive("projects") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                                        style={{ backgroundColor: getPrimaryColor(selectedColor)}}>
+                                    </span>
                             </button>
-                            <button 
-                                onClick={() => scrollToSection("contact")}
-                                className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("contact") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                Contact
-                                <span 
-                                    className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform ${
-                                        isActive("contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                                    }`}
-                                    style={{
-                                        backgroundColor: getPrimaryColor(selectedColor)
-                                    }}
-                                ></span>
+                            <button onClick={() => scrollToSection("contact")}
+                                    className={`cursor-pointer group relative text-sm font-medium transition-colors hover:text-primary 
+                                    ${isActive("contact") ? "text-primary" : "text-muted-foreground"}`}
+                                    style={{color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined}}>
+                                    Contact
+                                    <span className={`absolute inset-x-0 -bottom-1 h-0.5 transition-transform 
+                                          ${isActive("contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                                          style={{ backgroundColor: getPrimaryColor(selectedColor)}}>
+                                    </span>
                             </button>
                         </nav>
                         <div className="h-6 w-px bg-border" />
                         {/* <ColorPreference onColorChange={handleColorChange} currentColor={selectedColor} /> */}
                         <ThemeToggle/>
-                        <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="md:hidden"
-                            onClick={toggleMobileMenu}
-                        >
+                        <Button variant="outline" size="sm" className="md:hidden"onClick={toggleMobileMenu}>
                             {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
                         </Button>
                     </div>
@@ -238,38 +188,20 @@ export default function Home() {
                 {isMobileMenuOpen && (
                     <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80">
                         <nav className="container mx-auto py-4 flex flex-col gap-4 max-w-7xl">
-                            <button 
-                                onClick={() => scrollToSection("about")}
-                                className={`text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("about") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("about") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                About
+                            <button onClick={() => scrollToSection("about")} className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("about") ? "text-primary" : "text-muted-foreground"}`}
+                                    style={{ color: isActive("about") ? getPrimaryColor(selectedColor) : undefined}}>
+                                    About
                             </button>
-                            <button
-                                onClick={() => scrollToSection("projects")}
-                                className={`text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("projects") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                Projects
+                            <button onClick={() => scrollToSection("projects")} className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("projects") ? "text-primary" : "text-muted-foreground"}`}
+                                    style={{ color: isActive("projects") ? getPrimaryColor(selectedColor) : undefined}}>
+                                    Projects
                             </button>
-                            <button 
-                                onClick={() => scrollToSection("contact")}
-                                className={`text-sm font-medium transition-colors hover:text-primary ${
-                                    isActive("contact") ? "text-primary" : "text-muted-foreground"
-                                }`}
-                                style={{
-                                    color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined
-                                }}
-                            >
-                                Contact
+                            <button onClick={() => scrollToSection("contact")} className={`text-sm font-medium transition-colors hover:text-primary ${
+                                    isActive("contact") ? "text-primary" : "text-muted-foreground"}`}
+                                    style={{ color: isActive("contact") ? getPrimaryColor(selectedColor) : undefined}}>
+                                    Contact
                             </button>
                         </nav>
                     </div>
@@ -277,13 +209,9 @@ export default function Home() {
             </header>
             <main className="flex-1">
                 <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 overflow-hidden relative">
-                    {/* Gradient Background */}
-                    <div 
-                        className="absolute inset-0 -z-10"
-                        style={{
-                            background: `linear-gradient(135deg, ${getPrimaryLightColor(selectedColor)} 0%, transparent 50%, ${getPrimaryLightColor(selectedColor)} 100%)`
-                        }}
-                    ></div>
+                    <div className="absolute inset-0 -z-10"
+                         style={{ background: `linear-gradient(135deg, ${getPrimaryLightColor(selectedColor)} 0%, transparent 50%, ${getPrimaryLightColor(selectedColor)} 100%)`}}>
+                    </div>
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] dark:from-primary/20 dark:via-background dark:to-background"></div>
                     
                     <div className="container px-4 md:px-6 mx-auto">
@@ -369,13 +297,11 @@ export default function Home() {
                     <div className="absolute inset-0 -z-10 bg-white dark:bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] dark:from-muted/80 dark:via-background dark:to-background"></div>
                     <div className="container px-4 md:px-6 mx-auto">
                         <div className="max-w-[58rem] mx-auto flex flex-col items-center justify-center gap-4 text-center">
-                            <span 
-                                className="rounded-full px-3 py-1 text-sm font-medium"
-                                style={{
+                            <span className="rounded-full px-3 py-1 text-sm font-medium"
+                                  style={{
                                     backgroundColor: getPrimaryLightColor(selectedColor),
                                     color: getPrimaryColor(selectedColor)
-                                }}
-                            >
+                                  }}>
                                 About Me
                             </span>
                             <p className="text-xl font-medium sm:text-4xl xl:text-5xl/none">Experience & Expertise</p>
@@ -411,13 +337,13 @@ export default function Home() {
                                 {/* Skill Category Navigation */}
                                 <div className="flex flex-wrap gap-2 mb-8">
                                     {[
-                                    { id: "frontend", label: "Frontend" },
-                                    { id: "backend", label: "Backend" },
-                                    { id: "database", label: "Database" },
-                                    { id: "languages", label: "Languages" },
-                                    { id: "tools", label: "Tools & Monitoring" },
-                                    { id: "cloud", label: "Cloud & DevOps" },
-                                    // { id: "automation", label: "Automation & Testing" },
+                                        { id: "frontend", label: "Frontend" },
+                                        { id: "backend", label: "Backend" },
+                                        { id: "database", label: "Database" },
+                                        { id: "languages", label: "Languages" },
+                                        { id: "tools", label: "Tools & Monitoring" },
+                                        { id: "cloud", label: "Cloud & DevOps" },
+                                        // { id: "automation", label: "Automation & Testing" },
                                     ].map((tab) => (
                                     <button
                                         key={tab.id}
@@ -570,32 +496,6 @@ export default function Home() {
                                         selectedColor={selectedColor}
                                     />
                                     )}
-
-                                    {/* {activeSkillCategory === "automation" && (
-                                    <SkillCategory
-                                        title="Automation & Testing"
-                                        icon={
-                                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                                            <path
-                                            fillRule="evenodd"
-                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                                            clipRule="evenodd"
-                                            />
-                                        </svg>
-                                        }
-                                        skills={[
-                                        "WebdriverIO",
-                                        "Playwright",
-                                        "Postman",
-                                        "JMeter",
-                                        "Cucumber",
-                                        "Page Object Model",
-                                        "Azure DevOps",
-                                        "CI/CD Pipelines",
-                                        ]}
-                                        selectedColor={selectedColor}
-                                    />
-                                    )} */}
                                 </div>
                             </div>
                         </div>
@@ -665,13 +565,6 @@ export default function Home() {
                                     technologies={["JavaScript", "HTML5", "CSS3"]}
                                     link="#"
                                 />
-                                {/* <PersonalProjectCard
-                                    category="QueryEcho"
-                                    title="Math Question Game"
-                                    description="Educational game with multiple difficulty levels and progress tracking"
-                                    technologies={["React", "TypeScript", "HTML5", "CSS3"]}
-                                    link="#"
-                                /> */}
                             </div>
                         )}
 
@@ -847,33 +740,16 @@ function PersonalProjectCard({ category, title, description, technologies, link 
                     <span className="inline-flex items-center rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
                         {category}
                     </span>
-                    {/* <div className="h-5 w-5 rounded border border-muted-foreground/20 flex items-center justify-center">
-                        <svg className="h-3 w-3 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                    </div> */}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                    {technologies.map((tech, i) => (
-                            <span
-                                key={i}
-                            className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
-                        >
-                            {tech}
+                    { technologies && technologies.map((tech, i) => (
+                            <span key={i} className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+                                {tech}
                             </span>
-                        ))}
+                    ))}
                 </div>
-                {/* <div className="mt-4">
-                    <Link
-                        href={link}
-                        className="inline-flex items-center text-sm font-medium text-primary transition-colors hover:text-primary/80"
-                    >
-                        View Demo
-                        <ArrowRight className="ml-1 h-4 w-4" />
-                    </Link>
-                </div> */}
             </div>
         </div>
     )
@@ -887,25 +763,14 @@ function CompanyProjectCard({ title, description, impact, benefits, link, select
                 <p className="text-sm text-muted-foreground mb-4">{description}</p>
                 <div className="bg-primary/5 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-3">
-                        <div 
-                            className="h-5 w-5 rounded-full flex items-center justify-center"
-                            style={{
-                                backgroundColor: getPrimaryLightColor(selectedColor)
-                            }}
-                        >
-                            <svg 
-                                className="h-3 w-3" 
-                                style={{ color: getPrimaryColor(selectedColor) }}
-                                fill="currentColor" 
-                                viewBox="0 0 20 20"
-                            >
+                        <div className="h-5 w-5 rounded-full flex items-center justify-center" style={{ backgroundColor: getPrimaryLightColor(selectedColor)}}                        >
+                            <svg className="h-3 w-3"  style={{ color: getPrimaryColor(selectedColor) }} fill="currentColor"  viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
                         </div>
                         <span className="text-sm font-medium text-primary">Impact: {impact}</span>
                     </div>
-                    <ul className="space-y-1">
-                        {benefits.map((benefit, i) => (
+                    <ul className="space-y-1"> {benefits && benefits.map((benefit, i) => (
                             <li key={i} className="text-sm text-primary flex items-start gap-2">
                                 <span className="text-primary">•</span>
                                 <span>{benefit}</span>
@@ -922,12 +787,7 @@ function SkillCategory({ title, icon, skills, selectedColor }) {
     return (
         <div className="space-y-4">
             <div className="flex items-center gap-3">
-                <div 
-                    className="h-8 w-8 rounded-full flex items-center justify-center"
-                    style={{
-                        backgroundColor: getPrimaryLightColor(selectedColor)
-                    }}
-                >
+                <div  className="h-8 w-8 rounded-full flex items-center justify-center" style={{backgroundColor: getPrimaryLightColor(selectedColor)}}>
                     <div style={{ color: getPrimaryColor(selectedColor) }}>
                         {icon}
                     </div>
@@ -935,11 +795,8 @@ function SkillCategory({ title, icon, skills, selectedColor }) {
                 <h4 className="font-semibold">{title}</h4>
             </div>
             <div className="flex flex-wrap gap-2">
-                {skills.map((skill, i) => (
-                    <span
-                        key={i}
-                        className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-muted text-muted-foreground"
-                    >
+                {skills && skills.map((skill, i) => (
+                    <span key={i} className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-muted text-muted-foreground">
                         {skill}
                     </span>
                 ))}
