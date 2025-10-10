@@ -128,7 +128,7 @@ export default function Home() {
     return (
         <div className="flex min-h-screen flex-col bg-white dark:bg-gradient-to-b dark:from-background dark:to-background mx-auto max-w-full">
             <header className="sticky top-0 z-10 w-full border-b border-border bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 px-6">
-                <div className="container mx-auto flex h-16 items-center justify-between max-w-7xl">
+                <div className="container mx-auto flex h-16 items-center justify-between max-w-full">
                     <div className="flex gap-6 md:gap-10">
                         <Link href="/" className="flex items-center space-x-2">
                             <span className="font-bold text-xl" 
